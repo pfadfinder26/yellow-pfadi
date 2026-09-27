@@ -1,0 +1,22 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+?>
+<div class="footer" role="contentinfo">
+<div class="footer-inner">
+<div class="siteinfo">
+<?php echo $this->yellow->page->getPage("footer")->getContentHtml() ?>
+</div>
+<div class="siteinfo-banner"></div>
+</div>
+<div class="footer-bottom">
+<div class="footer-inner">
+<div class="copyright">&copy; <?php echo date("Y") ?> <?php echo $this->yellow->page->getHtml("sitename") ?></div>
+<div class="footerlinks"><?php echo $this->yellow->page->getPage("footerlinks")->getContentHtml() ?></div>
+</div>
+</div>
+</div>
+</div>
+<?php echo $this->yellow->page->getExtraHtml("footer") ?>
+</body>
+</html>

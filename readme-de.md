@@ -1,0 +1,155 @@
+# Pfadi 0.1.1
+
+Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
+
+Es orientiert sich an der [offiziellen PPÖ-Website-Vorlage](https://das-ppoe.at/website/) und an den Gruppenwebsites, die damit gebaut sind: roter Kopfbalken, Banner über die volle Breite mit dem Halstuch darunter, Kumbh Sans, zentrierte Überschriften in PPÖ-Rot `#9d2632`, graue Bänder, weiße Karten, roter Fußbereich. Funktioniert am Handy und am Desktop, ohne JavaScript, ohne externe Anfragen.
+
+## Wie man eine Erweiterung installiert
+
+[ZIP-Datei herunterladen](https://github.com/pfadfinder26/yellow-pfadi/archive/refs/heads/main.zip) und in den Ordner `system/extensions` kopieren. [Mehr über Erweiterungen](https://github.com/annaesvensson/yellow-update).
+
+## Wie man das Theme verwendet
+
+**Logo:** das Gruppenlogo als `media/images/logo.png` hochladen, es erscheint im roten Kopfbalken.
+Am besten die weiße Fassung des PPÖ-Logos, sie enthält den Gruppennamen schon, deshalb wird der
+Seitenname fürs Auge ausgeblendet und für Screenreader behalten. Ohne Logo steht der Seitenname als
+Text da.
+
+**Banner:** eine Seite mit der Einstellung `Banner` bekommt ein großes Bild unter dem Kopfbalken und
+darunter das Halstuch. Mehrere Bilder, mit Komma getrennt, werden zu einem Karussell: am Handy
+wischbar, am Desktop scrollbar, und `pfadi.js` schaltet alle sechs Sekunden weiter und pausiert,
+solange jemand darauf zeigt oder tippt. Es läuft im Kreis: das Skript hängt eine Kopie des ersten
+Bildes an und setzt die Position stillschweigend zurück an den Anfang, sobald das Scrollen auf dieser
+Kopie endet, so geht es immer vorwärts weiter statt zurückzuspulen. Ohne JavaScript bleibt es ein
+Karussell zum Wischen, bei `prefers-reduced-motion` bewegt es sich nicht von selbst:
+
+    ---
+    Title: Unsere Gruppe
+    Banner: media/images/lager.jpg, media/images/sola.jpg
+    Subtitle: Seit 1954 in Beispieldorf
+    ---
+
+**Halstuch:** unter dem Banner hängt ein Gruppenhalstuch, das Theme zeichnet ein allgemeines blaues.
+`PfadiHalstuch` in `system/extensions/yellow-system.ini` entscheidet für die ganze Website, eine
+Einstellung `Halstuch` auf einer Seite entscheidet für diese Seite:
+
+| Wert | Ergebnis |
+|:-----|:---------|
+| `default` | das gezeichnete Halstuch des Themes, Voreinstellung |
+| `none` | kein Halstuch, das Banner endet beim Inhalt |
+| `halstuch.png` | das eigene Halstuch aus `media/images` |
+
+Ein Foto des eigenen Halstuchs ist zugeschnitten wie in der
+[PPÖ-Vorlage](https://das-ppoe.at/website/): breit und flach, unter den Spitzen transparent. Seiten
+ohne Banner zeigen nie ein Halstuch.
+
+**Band:** ein grauer Abschnitt über die volle Breite, für Teile einer Seite, die auffallen sollen.
+Ganz ohne HTML, das Markdown von Yellow macht Blöcke mit `!` am Zeilenanfang:
+
+    ! {.band}
+    ! ## Aktuelles
+    ! Was bei uns los ist.
+
+**Karten:** ein Raster aus weißen Kacheln, für Stufen, Neuigkeiten oder Kontakte. Ein `!` pro
+Verschachtelungsebene, eine leere Blockzeile trennt die Karten. Am Handy steht alles untereinander:
+
+    ! {.band}
+    ! ## Unsere Stufen
+    !
+    ! ! {.cards}
+    ! ! ! {.card}
+    ! ! ! ### WiWö {.stufe.wiwoe}
+    ! ! ! Freitag 17:00 bis 18:15
+    ! ! !
+    ! ! ! [Mehr](stufen/){.button}
+    ! !
+    ! ! ! {.card}
+    ! ! ! ### GuSp {.stufe.gusp}
+    ! ! ! Freitag 18:30 bis 20:00
+
+**Navigation:** die obersten Seiten sind das Menü. Eine Seite mit Unterseiten bekommt ein Klappmenü, das beim Darüberfahren einblendet, am Handy sind die Unterseiten zugeklappt und fahren auf, wenn man den Pfeil neben der Seite antippt. Die Unterseiten der aktuellen Seite sind schon offen.
+
+**Karten aus Seiten:** dieselben Angaben zweimal schreiben macht keine Freude. Mit der [Cards-Erweiterung](https://github.com/pfadfinder26/yellow-cards) entsteht eine Karte aus einer anderen Seite und deren Einstellungen, `[cards /stufen/ stufe]` macht eine Karte pro Stufenseite. Dieses Theme gestaltet `.cards` und `.card`, das HTML der Karte kommt aus der eigenen Vorlage.
+
+**Steckbrief:** eine Kartenvorlage kann einen runden Stufenbutton neben eine Liste von Angaben
+stellen, `.factsheet` mit einem Bild und einer `<dl>`, am breiten Bildschirm nebeneinander, am Handy
+untereinander.
+
+**Zeilenumbruch:** `.nowrap` hält einen Textteil zusammen, `Mittwoch,` bricht um,
+`19:00 bis 20:30 Uhr` nicht.
+
+**Karten als Link:** `.card-link` mit einem `.stretch`-Link darin macht die ganze Karte anklickbar,
+der Link legt sich über die Karte, ohne dass sich das Aussehen ändert. Andere Links in der Karte,
+etwa eine Mailadresse, bleiben obenauf und funktionieren weiter.
+
+**Fußbereich:** die Fußzeilenseite beginnt mit einem Absatz über die volle Breite, danach wird ein
+Block `! {.footer-row}` mit `! ! {.footer-col}`-Blöcken darin zu einer Reihe von Spalten, Logo,
+Social-Buttons, Adresse, so wie es die Gruppenwebsites machen.
+
+**Dateilisten:** `.files` stellt Name, Typ, Größe und Datum in ausgerichtete Spalten,
+`.files-folder` ist ein Ordner zum Auf- und Zuklappen, sein Name steht als normaler Text da, weil er
+kein Link ist.
+
+**Kalender:** eine Terminliste legt ihre Spalten auf ein gemeinsames Raster, Datum, Titel, Kalender
+und Link stehen also über alle Zeilen hinweg untereinander, am Handy untereinander gestapelt. Die
+Monatsansicht ist eine Wochentabelle, `.calendar-month`, mit umrandetem heutigen Tag und den
+Terminen als kleine Schildchen in ihrer Kalenderfarbe.
+
+**Monatslinks:** `.calendar-pagination` über der Monatsansicht sieht aus wie Buttons, voriger Monat
+links, nächster rechts, zurück zu diesem Monat in der Mitte.
+
+**Kalenderschildchen:** `.calendar-name` zeigt, aus welchem Kalender ein Termin kommt, die
+Abo-Links unter einer Liste sehen gleich aus. Die Farbe kommt aus dem Kalender selbst, als die
+Eigenschaften `--calendar-color` und `--calendar-text`.
+
+**Social-Links:** ein Link mit `{.social.instagram}`, `{.social.facebook}` oder `{.social.mail}`
+wird zu einem quadratischen Button mit diesem Zeichen, in der Farbe des Textes ringsum, das passt im
+roten Fußbereich wie im Inhalt. Ein Icon ist eine SVG-Maske, für ein weiteres die SVG-Datei dazu
+legen und drei Zeilen CSS schreiben wie die unter `/* Social links */`.
+
+**Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
+
+**Stufenschilder:** `{.stufe.biber}`, `{.stufe.wiwoe}`, `{.stufe.gusp}`, `{.stufe.caex}`,
+`{.stufe.raro}` und `{.stufe.pwa}` machen aus einer Überschrift ein farbiges Schild in den offiziellen
+PPÖ-Stufenfarben (#904837, #fbbb21, #159a34, #0b4697, #e62336, #e6007e).
+
+**Buttons:** `{.button}` hinter einen Link schreiben.
+
+**Kopf- und Fußzeilentext:** die Seiten `content/shared/header.md` und `content/shared/footer.md`
+erscheinen unter dem Seitennamen und im roten Fußbereich. Überschriften im Fußbereich werden am
+breiten Bildschirm zu Spalten.
+
+**Fußzeilenlinks:** `content/shared/footerlinks.md` füllt die rechte Seite der dunklen Fußzeile,
+neben dem Copyright. Eine Zeile Links, getrennt durch einen Mittelpunkt, für die Seiten, die niemand
+im Menü haben will, und für Dienste woanders:
+
+    [Impressum](/impressum/) · [Datenschutz](/datenschutz/) · [Cloud](https://cloud.example.org)
+
+Diesen Rechtsseiten in den Seiteneinstellungen `Status: unlisted` geben, dann bleiben sie aus dem
+Menü und der Link in der Fußzeile funktioniert trotzdem.
+
+Der letzte Link in dieser Zeile kann den Editor für die gerade gezeigte Seite öffnen,
+`[edit - Bearbeiten]` aus der [Edit-Erweiterung](https://github.com/annaesvensson/yellow-edit).
+Abgemeldet führt er zur Anmeldung, so kommen Leiter*innen von jeder Seite aus hinein.
+
+## Wie man ein Theme anpasst
+
+Das Aussehen der Website lässt sich mit HTML und CSS anpassen. Alle HTML-Dateien liegen im Ordner `system/layouts`, alle CSS-Dateien im Ordner `system/themes`. Farben und Schriften sind CSS-Variablen am Anfang von `pfadi.css`, eigene Regeln gehören ans Ende unter `/* Custom */`. [Mehr über HTML und CSS](https://datenstrom.se/yellow/help/how-to-customise-html-and-css).
+
+Das Standard-Theme steht in der Datei `system/extensions/yellow-system.ini`. Ein anderes Theme kann in den [Seiteneinstellungen](https://github.com/annaesvensson/yellow-core#settings-page) am Anfang jeder Seite stehen, zum Beispiel `Theme: pfadi`.
+
+## Danksagungen
+
+Diese Erweiterung enthält Kumbh Sans von den Kumbh-Sans-Projektautoren. Danke für die schöne Schrift.
+
+Die Social-Icons sind [Font Awesome 6 Free](https://fontawesome.com/), `fa6-brands/instagram`,
+`fa6-brands/facebook-f` und `fa6-solid/envelope`, geholt über [Iconify](https://iconify.design/) und
+verwendet unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Sie liegen als Dateien im
+Theme, es wird nichts von einem anderen Server geladen.
+
+Das Favicon und `pfadi-lilie.png` sind die offizielle PPÖ-Lilie, das Zeichen der Pfadfinder und
+Pfadfinderinnen Österreichs. Sie gehören auf die Website einer PPÖ-Gruppe, sonst nirgendwohin.
+
+Das PPÖ-Logo und die Stufenlogos sind nicht Teil des Themes, die Dateien gibt es bei der eigenen Gruppe.
+
+Hast du Fragen? [Hier gibt's Hilfe](https://datenstrom.se/yellow/help/).

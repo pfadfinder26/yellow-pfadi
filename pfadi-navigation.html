@@ -1,0 +1,34 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+$pages = $this->yellow->content->top();
+$this->yellow->page->setLastModified($pages->getModified());
+$number = 0;
+?>
+<input class="navigation-toggle" type="checkbox" id="navigation-toggle" aria-label="<?php echo $this->yellow->language->getTextHtml("coreNavigation") ?>" />
+<label class="navigation-button" for="navigation-toggle" aria-hidden="true"></label>
+<div class="navigation" role="navigation" aria-label="<?php echo $this->yellow->language->getTextHtml("coreNavigation") ?>">
+<ul>
+<?php foreach ($pages as $page): ?>
+<?php $children = $this->yellow->content->getChildren($page->getLocation()) ?>
+<?php if (count($children)): ?>
+<?php $id = "submenu-".(++$number) ?>
+<li class="submenu">
+<a<?php echo $page->isActive() ? " class=\"active\" aria-current=\"page\"" : "" ?> href="<?php echo $page->getLocation(true) ?>"><?php echo $page->getHtml("titleNavigation") ?></a>
+<input class="submenu-toggle" type="checkbox" id="<?php echo $id ?>"<?php echo $page->isActive() ? " checked" : "" ?> aria-label="<?php echo $page->getHtml("titleNavigation") ?>" />
+<label class="submenu-button" for="<?php echo $id ?>" aria-hidden="true"></label>
+<div class="submenu-panel">
+<ul>
+<?php foreach ($children as $child): ?>
+<li><a<?php echo $child->isActive() ? " class=\"active\" aria-current=\"page\"" : "" ?> href="<?php echo $child->getLocation(true) ?>"><?php echo $child->getHtml("titleNavigation") ?></a></li>
+<?php endforeach ?>
+</ul>
+</div>
+</li>
+<?php else: ?>
+<li><a<?php echo $page->isActive() ? " class=\"active\" aria-current=\"page\"" : "" ?> href="<?php echo $page->getLocation(true) ?>"><?php echo $page->getHtml("titleNavigation") ?></a></li>
+<?php endif ?>
+<?php endforeach ?>
+</ul>
+</div>
+<div class="navigation-banner"></div>

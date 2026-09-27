@@ -1,0 +1,29 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+$fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/logo.png";
+$fileLocationLogo = $this->yellow->page->getBase().$this->yellow->system->get("coreMediaLocation")."images/logo.png";
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->yellow->page->getHtml("language") ?>">
+<head>
+<title><?php echo $this->yellow->page->getHtml("titleHeader") ?></title>
+<meta charset="utf-8" />
+<meta name="description" content="<?php echo $this->yellow->page->getHtml("description") ?>" />
+<meta name="author" content="<?php echo $this->yellow->page->getHtml("author") ?>" />
+<meta name="generator" content="Datenstrom Yellow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<?php echo $this->yellow->page->getExtraHtml("header") ?>
+</head>
+<body>
+<div class="<?php echo "page layout-".$this->yellow->page->getHtml("layout") ?>">
+<div class="header" role="banner">
+<div class="header-inner">
+<div class="sitename">
+<h1><a<?php echo is_file($fileNameLogo) ? " class=\"has-logo\"" : "" ?> href="<?php echo $this->yellow->page->getBase(true)."/" ?>"><?php if (is_file($fileNameLogo)): ?><img class="sitename-logo" src="<?php echo $fileLocationLogo ?>" alt="" /><?php endif ?><span class="sitename-text"><?php echo $this->yellow->page->getHtml("sitename") ?></span></a></h1>
+<?php echo $this->yellow->page->getPage("header")->getContentHtml() ?>
+</div>
+<div class="sitename-banner"></div>
+<?php $this->yellow->layout("navigation") ?>
+</div>
+</div>
