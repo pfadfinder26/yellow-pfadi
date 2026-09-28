@@ -2068,10 +2068,10 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         padding-top: 0;
     }
     .ausschreibung-briefkopf {
-        margin-bottom: 1cm;
+        margin-bottom: 0.4cm;
     }
     .ausschreibung-head {
-        margin-bottom: 0.8cm;
+        margin-bottom: 0.6cm;
     }
     .calendar-add,
     .ausschreibung-meta,
@@ -2153,22 +2153,32 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung-head h1 {
         font-size: 17pt;
     }
+    /* on paper the list is not a grid, so the lines flow around the image and use the
+       whole width again below it */
     .ausschreibung dl {
+        display: block;
         margin: 0.6cm 0;
-        gap: 0 1.2cm;
     }
-    /* the lines of one entry follow each other, the space is between the entries */
-    .ausschreibung dt,
+    .ausschreibung dt {
+        float: left;
+        clear: left;
+        width: 3.4cm;
+        margin: 0.4cm 0 0;
+    }
     .ausschreibung dd {
-        margin: 0;
+        margin: 0 0 0 4.2cm;
     }
-    .ausschreibung dt,
     .ausschreibung dt + dd {
         margin-top: 0.4cm;
     }
     .ausschreibung dl > dt:first-child,
     .ausschreibung dl > dt:first-child + dd {
         margin-top: 0;
+    }
+    .ausschreibung dl::after {
+        content: "";
+        display: block;
+        clear: left;
     }
     .ausschreibung-image {
         width: 6cm;
