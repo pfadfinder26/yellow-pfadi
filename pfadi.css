@@ -1954,6 +1954,10 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 .cloudform-options input {
     margin-right: 0.5rem;
 }
+.cloudform-file {
+    color: var(--text-muted);
+    font-style: italic;
+}
 .cloudform-website {
     position: absolute;
     left: -9999px;
@@ -2094,7 +2098,11 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .cloudform-submit,
     .cloudform-link,
     .cloudform-status,
-    .cloudform-website {
+    .cloudform-file {
+    color: var(--text-muted);
+    font-style: italic;
+}
+.cloudform-website {
         display: none;
     }
     /* the form is the sheet that used to be handed out, on a page of its own */
@@ -2127,6 +2135,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .cloudform-intro {
         margin: 0 0 0.5cm;
+        color: #000;
+    }
+    .cloudform-file {
         color: #000;
     }
     .cloudform-fields {
