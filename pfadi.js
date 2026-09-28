@@ -169,6 +169,14 @@
             scroller.appendChild(button);
             return button;
         });
+        // cards that wait for their date stand in front, the row starts at today
+        var today = row.querySelector(".card:not(.entry-scheduled)");
+        if (today && today!==row.firstElementChild) {
+            var behavior = row.style.scrollBehavior;
+            row.style.scrollBehavior = "auto";
+            row.scrollLeft = today.offsetLeft-row.offsetLeft;
+            row.style.scrollBehavior = behavior;
+        }
         function update() {
             var scrollable = row.scrollWidth-row.clientWidth;
             scroller.classList.toggle("cards-scroller-idle", scrollable<=2);
