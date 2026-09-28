@@ -2161,6 +2161,8 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         border: 1px solid #000;
         border-radius: 0;
     }
+    /* a square for what may be ticked more than once, a circle for one of several:
+       that is what a reader looking for fields expects to find */
     .cloudform-options input {
         appearance: none;
         -webkit-appearance: none;
@@ -2169,6 +2171,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         height: 0.4cm;
         border: 1px solid #000;
         vertical-align: -0.05cm;
+    }
+    .cloudform-options input[type="radio"] {
+        border-radius: 50%;
     }
     .ausschreibung-head h1 {
         font-size: 17pt;
