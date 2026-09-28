@@ -933,8 +933,16 @@ a.stufe:focus-visible {
     font-size: 0.8125rem;
     white-space: nowrap;
 }
-.calendar .calendar-link {
+.calendar-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
     margin: 1.5rem 0;
+}
+.calendar .calendar-footer > p {
+    margin: 0;
 }
 @media screen and (max-width: 40em) {
     .calendar ul,
@@ -1113,8 +1121,10 @@ a.calendar-name:focus-visible {
     justify-self: start;
 }
 .calendar-subscribe {
-    margin: 1.5rem 0 0.5rem;
     font-size: 0.8125rem;
+}
+.calendar-copied {
+    opacity: 0.75;
 }
 
 /* Blog entries and lists */
