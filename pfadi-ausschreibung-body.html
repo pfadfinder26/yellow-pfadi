@@ -8,6 +8,17 @@ $logo = is_file($this->yellow->system->get("coreMediaDirectory")."images/logo-pr
     "logo-print.png" : "logo.png";
 $fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/".$logo;
 $fileLocationLogo = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/".$logo;
+// the image of the page goes beside the list, where the list begins
+$image = $page->get("image");
+$fileLocationImage = substru($image, 0, 1)!="/" ?
+    $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
+    $page->getBase().$image;
+$contentHtml = $page->getContentHtml();
+if (!is_string_empty($image) && strposu($contentHtml, "ausschreibung-image")===false) {
+    $imageHtml = "<img class=\"ausschreibung-image\" src=\"".htmlspecialchars($fileLocationImage)."\" alt=\"\" />\n";
+    $contentHtml = strposu($contentHtml, "<dl>")!==false ?
+        preg_replace("/<dl>/", $imageHtml."<dl>", $contentHtml, 1) : $imageHtml.$contentHtml;
+}
 // when a date in the calendar links to this page, it can be saved from here
 $eventHtml = "";
 if ($this->yellow->extension->isExisting("calendar")) {
@@ -30,7 +41,7 @@ if ($this->yellow->extension->isExisting("calendar")) {
 <?php endif ?>
 <?php echo $eventHtml ?>
 </div>
-<?php echo $page->getContentHtml() ?>
+<?php echo $contentHtml ?>
 <?php
 // who wrote it, when, and what it is about, small below the page and never on paper
 $locationStart = $page->getPage("blogStart")->getLocation(true);

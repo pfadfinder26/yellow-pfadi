@@ -1,4 +1,4 @@
-# Pfadi 0.6.3
+# Pfadi 0.6.4
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -132,9 +132,9 @@ centred in the space next to the rail and stays open when something next to it i
 and a blog entry with a setting `Ausschreibung` is laid out the same way, so an announcement stands
 in the news like every other entry:
 the title and the `Termin` of the camp above the text, the image of the camp beside the text, and a
-definition list as the two columns that say where, when and what it costs. The image of the camp
-goes into the page itself, right before that list, `![](camp.jpg){.ausschreibung-image}`, so it
-stands beside it. A block `{.closing}`
+definition list as the two columns that say where, when and what it costs. The `Image` of the page stands
+beside that list, the layout puts it there, so it is named once and shows on the cards as well. An
+image with `class="ausschreibung-image"` in the page itself takes over when there is one. A block `{.closing}`
 holds the lines at the end, a block `{.note}` the small print below them. Below all of it stand the
 date, the authors and the tags of the page, small and linked into the news, and never on paper.
 
