@@ -1208,6 +1208,10 @@ a.calendar-name:focus-visible {
     justify-self: start;
 }
 .calendar-subscribe {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.5rem;
     font-size: 0.8125rem;
 }
 .calendar-copied {
