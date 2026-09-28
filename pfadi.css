@@ -1979,7 +1979,19 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 .cloudform-failed {
     background-color: #f7dcdc;
 }
+.cloudform-submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+}
 .cloudform-link {
+    font-size: 0.8125rem;
+}
+.cloudform-link-alone {
+    margin-top: 1rem;
     font-size: 0.8125rem;
 }
 @media screen and (max-width: 40em) {
