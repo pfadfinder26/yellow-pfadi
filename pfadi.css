@@ -2098,18 +2098,18 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .calendar-add,
     .ausschreibung-meta,
-    .cloudform-submit,
-    .cloudform-link,
     .cloudform-status,
-    .cloudform-file {
-    color: var(--text-muted);
-    font-style: italic;
-}
-.cloudform-again {
-    margin: 1rem 0 0;
-}
-.cloudform-website {
+    .cloudform-again,
+    .cloudform-website {
         display: none;
+    }
+    /* on paper nothing can be sent, the way to the form in the cloud stays */
+    .cloudform-submit button {
+        display: none;
+    }
+    .cloudform-submit {
+        justify-content: flex-start;
+        margin-top: 0.5cm;
     }
     /* the form is the sheet that used to be handed out, on a page of its own */
     .cloudform {

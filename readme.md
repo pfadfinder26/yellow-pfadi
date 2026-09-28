@@ -1,4 +1,4 @@
-# Pfadi 0.8.7
+# Pfadi 0.8.8
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -163,7 +163,7 @@ and only when a calendar really mentions the page.
 stands in a box of its own, question on the left and answer on the right, all answers starting at
 the same place, and printed it becomes the sheet it replaces: on a page of its
 own, with the letterhead, the title and the dates of the camp above it, the fields as lines and
-boxes to fill in by hand, and without the button that sends it.
+boxes to fill in by hand, and without the button that sends it, but with the link that opens it in the cloud.
 
 The margins of the paper belong to the page, not to `@page`, which leaves a browser no room to
 print its own address and date into them.

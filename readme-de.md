@@ -1,4 +1,4 @@
-# Pfadi 0.8.7
+# Pfadi 0.8.8
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -172,7 +172,7 @@ Kalender die Seite wirklich nennt.
 [Cloudforms-Erweiterung](https://github.com/pfadfinder26/yellow-cloudforms) steht in einem eigenen
 Rahmen, die Frage links, die Antwort rechts, alle Antworten beginnen an derselben Stelle, und gedruckt wird es zu dem Zettel, den es ersetzt: auf einer eigenen Seite, darüber
 Briefkopf, Titel und Termin des Lagers, die Felder als Linien und Kästchen zum Ausfüllen, ohne den
-Knopf zum Abschicken.
+Knopf zum Abschicken, aber mit dem Link, der es in der Cloud öffnet.
 
 Die Ränder des Papiers gehören zur Seite, nicht zu `@page`, damit bleibt dem Browser kein Platz,
 seine eigene Adresse und das Datum hineinzudrucken.
