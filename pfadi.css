@@ -181,6 +181,16 @@ a:focus-visible {
     max-height: 2.75rem;
     width: auto;
 }
+/* the logo of the group is drawn as a mask, so it is white like everything up here */
+.header .sitename-logo-group {
+    display: block;
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    background-color: currentColor;
+    -webkit-mask: var(--logo-group) center/contain no-repeat;
+    mask: var(--logo-group) center/contain no-repeat;
+}
 .header .has-logo .sitename-text {
     position: absolute;
     width: 1px;
@@ -2079,8 +2089,17 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         gap: 1.5rem;
         margin-bottom: 1.5cm;
     }
+    .ausschreibung-logos {
+        display: flex;
+        align-items: center;
+        gap: 0.5cm;
+    }
     .ausschreibung-logo {
         width: 6cm;
+        height: auto;
+    }
+    .ausschreibung-logo-group {
+        width: 1.6cm;
         height: auto;
     }
     .ausschreibung-absender {

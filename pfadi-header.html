@@ -3,6 +3,9 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 $fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/logo.png";
 $fileLocationLogo = $this->yellow->page->getBase().$this->yellow->system->get("coreMediaLocation")."images/logo.png";
+// the logo of the group stands left of the one of the association, white like the header
+$fileNameGroup = $this->yellow->system->get("coreMediaDirectory")."images/logo-gruppe.svg";
+$fileLocationGroup = $this->yellow->page->getBase().$this->yellow->system->get("coreMediaLocation")."images/logo-gruppe.svg";
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->yellow->page->getHtml("language") ?>">
@@ -20,7 +23,7 @@ $fileLocationLogo = $this->yellow->page->getBase().$this->yellow->system->get("c
 <div class="header" role="banner">
 <div class="header-inner">
 <div class="sitename">
-<h1><a<?php echo is_file($fileNameLogo) ? " class=\"has-logo\"" : "" ?> href="<?php echo $this->yellow->page->getBase(true)."/" ?>"><?php if (is_file($fileNameLogo)): ?><img class="sitename-logo" src="<?php echo $fileLocationLogo ?>" alt="" /><?php endif ?><span class="sitename-text"><?php echo $this->yellow->page->getHtml("sitename") ?></span></a></h1>
+<h1><a<?php echo is_file($fileNameLogo) ? " class=\"has-logo\"" : "" ?> href="<?php echo $this->yellow->page->getBase(true)."/" ?>"><?php if (is_file($fileNameGroup)): ?><span class="sitename-logo-group" style="--logo-group:url('<?php echo htmlspecialchars($fileLocationGroup) ?>')" aria-hidden="true"></span><?php endif ?><?php if (is_file($fileNameLogo)): ?><img class="sitename-logo" src="<?php echo $fileLocationLogo ?>" alt="" /><?php endif ?><span class="sitename-text"><?php echo $this->yellow->page->getHtml("sitename") ?></span></a></h1>
 <?php echo $this->yellow->page->getPage("header")->getContentHtml() ?>
 </div>
 <div class="sitename-banner"></div>

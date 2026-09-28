@@ -1,4 +1,4 @@
-# Pfadi 0.9.1
+# Pfadi 0.10.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -192,6 +192,10 @@ veröffentlicht, mit einem Formular an ihrer Stelle.
 **Telefonnummern:** der Markdown-Parser versteckt Mailadressen, eine Telefonnummer lässt er stehen.
 `getPhoneHtml` versteckt sie genauso, und in einer Seite schreibt man `[phone +43 664 1234567]`.
 Eine Zahl in Klammern, die Null von `+43 (0)664`, gehört nicht zur gewählten Nummer.
+
+**Das Logo der Gruppe:** eine Datei `images/logo-gruppe.svg` steht links vom Logo des Verbands, im
+Kopf der Seite als weiße Maske, auf dem Papier in ihren eigenen Farben. Ohne die Datei ändert sich
+nichts.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 

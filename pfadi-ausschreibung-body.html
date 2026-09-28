@@ -13,9 +13,15 @@ $image = $page->get("image");
 $fileLocationImage = substru($image, 0, 1)!="/" ?
     $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
     $page->getBase().$image;
+// the logo of the group belongs on the paper as well, in its own colours
+$fileNameGroup = $this->yellow->system->get("coreMediaDirectory")."images/logo-gruppe.svg";
+$fileLocationGroup = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/logo-gruppe.svg";
 $briefkopfHtml = "<div class=\"ausschreibung-briefkopf\">\n".
+    "<span class=\"ausschreibung-logos\">".
+    (is_file($fileNameGroup) ? "<img class=\"ausschreibung-logo-group\" src=\"".
+        htmlspecialchars($fileLocationGroup)."\" alt=\"\" />" : "").
     (is_file($fileNameLogo) ? "<img class=\"ausschreibung-logo\" src=\"".
-        htmlspecialchars($fileLocationLogo)."\" alt=\"\" />\n" : "").
+        htmlspecialchars($fileLocationLogo)."\" alt=\"\" />" : "")."</span>\n".
     "<div class=\"ausschreibung-absender\">".$page->getPage("briefkopf")->getContentHtml()."</div>\n".
     "</div>\n";
 $contentHtml = $page->getContentHtml();
