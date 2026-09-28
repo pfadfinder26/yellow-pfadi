@@ -1,4 +1,4 @@
-# Pfadi 0.7.3
+# Pfadi 0.7.4
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -164,9 +164,8 @@ is styled like the rest of the site, and printed it becomes the sheet it replace
 own, with the letterhead, the title and the dates of the camp above it, the fields as lines and
 boxes to fill in by hand, and without the button that sends it.
 
-The margins of the paper are part of the page, not of `@page`, which is what keeps a browser from
-printing its own address and date into them. Turning "headers and footers" off in the print dialog
-does the same for every other page.
+The address and the date that a browser prints into the margins are its own, turning "headers and
+footers" off in the print dialog is what removes them.
 
 **Printing:** printed, a page drops the header, the navigation and the footer, and an announcement
 gets the letterhead that belongs on paper: the logo of the group on the left, the shared page

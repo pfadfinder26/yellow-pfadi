@@ -1963,15 +1963,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 @media print {
     @page {
         size: A4;
-        margin: 0;
-    }
-    .ausschreibung.main {
-        padding: 18mm 16mm;
-        box-sizing: border-box;
-    }
-    .ausschreibung .ausschreibung-sheet {
-        /* the page of the sheet starts at the top of the paper, it brings its own margin */
-        padding: 18mm 0 0;
+        margin: 18mm 16mm;
     }
     body {
         background-color: #fff;
@@ -2127,7 +2119,6 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung .note {
         margin-top: 0.6cm;
     }
-    .ausschreibung dl,
     .ausschreibung dt,
     .ausschreibung dd,
     .ausschreibung .closing,

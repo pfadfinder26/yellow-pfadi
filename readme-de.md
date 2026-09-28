@@ -1,4 +1,4 @@
-# Pfadi 0.7.3
+# Pfadi 0.7.4
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -174,9 +174,8 @@ der Seite, und gedruckt wird es zu dem Zettel, den es ersetzt: auf einer eigenen
 Briefkopf, Titel und Termin des Lagers, die Felder als Linien und Kästchen zum Ausfüllen, ohne den
 Knopf zum Abschicken.
 
-Die Ränder des Papiers gehören zur Seite, nicht zu `@page`, und genau das hält den Browser davon
-ab, seine eigene Adresse und das Datum hineinzudrucken. „Kopf- und Fußzeilen“ im Druckdialog
-abzuschalten tut dasselbe für jede andere Seite.
+Adresse und Datum in den Rändern druckt der Browser selbst, sie verschwinden, wenn man „Kopf- und
+Fußzeilen“ im Druckdialog abschaltet.
 
 **Drucken:** gedruckt lässt eine Seite Kopf, Navigation und Fußbereich weg, und eine Ausschreibung
 bekommt den Briefkopf, der aufs Papier gehört: links das Logo der Gruppe, rechts die geteilte Seite
