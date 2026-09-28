@@ -1861,7 +1861,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 /* A form that comes from the cloud, on paper a sheet of its own */
 
 .ausschreibung-sheet {
-    display: contents;
+    display: block;
 }
 .ausschreibung-sheet-head {
     display: none;
@@ -1963,7 +1963,15 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 @media print {
     @page {
         size: A4;
-        margin: 18mm 16mm;
+        margin: 0;
+    }
+    .ausschreibung.main {
+        padding: 18mm 16mm;
+        box-sizing: border-box;
+    }
+    .ausschreibung .ausschreibung-sheet {
+        /* the page of the sheet starts at the top of the paper, it brings its own margin */
+        padding: 18mm 0 0;
     }
     body {
         background-color: #fff;
@@ -2044,6 +2052,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .ausschreibung-sheet {
         display: block;
+        page-break-before: always;
         break-before: page;
     }
     .ausschreibung-sheet-head {
@@ -2067,6 +2076,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .cloudform-question {
         margin: 0 0 0.7cm;
+        page-break-inside: avoid;
         break-inside: avoid;
     }
     .cloudform input[type="text"],
@@ -2120,7 +2130,10 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung dl,
     .ausschreibung dt,
     .ausschreibung dd,
-    .ausschreibung .closing {
+    .ausschreibung .closing,
+    .ausschreibung-briefkopf,
+    .ausschreibung-sheet-head {
+        page-break-inside: avoid;
         break-inside: avoid;
     }
     .ausschreibung .note {
