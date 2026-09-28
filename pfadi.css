@@ -1675,6 +1675,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     display: none;
 }
 
+.ausschreibung {
+    padding-top: 2.5rem;
+}
 .ausschreibung-head {
     margin-bottom: 2rem;
     text-align: center;
@@ -1805,6 +1808,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .ausschreibung-absender p {
         margin: 0 0 0.4rem;
+    }
+    .ausschreibung {
+        padding-top: 0;
     }
     .ausschreibung-briefkopf {
         margin-bottom: 1cm;
