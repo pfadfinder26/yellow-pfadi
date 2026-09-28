@@ -1874,8 +1874,12 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     margin: 2rem 0;
 }
 .cloudform h3 {
-    margin: 0 0 1.25rem;
+    margin: 0 0 0.5rem;
     text-align: left;
+}
+.cloudform-intro {
+    margin: 0 0 1.25rem;
+    color: var(--text-muted);
 }
 .cloudform-fields {
     display: grid;
@@ -2120,6 +2124,10 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .cloudform h3 {
         display: none;
+    }
+    .cloudform-intro {
+        margin: 0 0 0.5cm;
+        color: #000;
     }
     .cloudform-fields {
         padding: 0;
