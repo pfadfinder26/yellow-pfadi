@@ -10,7 +10,9 @@ $number = 0;
 <div class="navigation" role="navigation" aria-label="<?php echo $this->yellow->language->getTextHtml("coreNavigation") ?>">
 <ul>
 <?php foreach ($pages as $page): ?>
-<?php $children = $this->yellow->content->getChildren($page->getLocation()) ?>
+<?php // a list of blog entries is a page of its own, its entries do not belong in the menu ?>
+<?php $children = $page->get("layout")=="blog-start" ?
+    $this->yellow->content->clean() : $this->yellow->content->getChildren($page->getLocation()) ?>
 <?php if (count($children)): ?>
 <?php $id = "submenu-".(++$number) ?>
 <li class="submenu">
