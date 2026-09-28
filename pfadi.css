@@ -372,7 +372,8 @@ a:focus-visible {
     scroll-snap-align: center;
     width: 100%;
     height: auto;
-    max-height: 26rem;
+    /* as high as the banner used to be at the full width of the page, 1280 / 2.5 */
+    max-height: min(32rem, 70vh);
     object-fit: contain;
 }
 @media (prefers-reduced-motion: reduce) {
