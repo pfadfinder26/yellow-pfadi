@@ -2,24 +2,8 @@
 // Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 $this->yellow->layout("header");
-$banner = $this->yellow->page->get("banner");
-$halstuch = $this->yellow->page->isExisting("halstuch") ?
-    $this->yellow->page->get("halstuch") : $this->yellow->system->get("pfadiHalstuch");
-$fileLocationHalstuch = strposu($halstuch, "/")===false ?
-    $this->yellow->page->getBase().$this->yellow->system->get("coreImageLocation").$halstuch :
-    $this->yellow->page->getBase()."/".ltrim($halstuch, "/");
 ?>
-<?php $banners = array_values(array_filter(array_map("trim", explode(",", $banner)))) ?>
-<?php if (!is_array_empty($banners)): ?>
-<div class="banner<?php echo count($banners)>1 ? " banner-carousel" : "" ?>">
-<?php foreach ($banners as $number=>$file): ?>
-<img src="<?php echo htmlspecialchars($this->yellow->page->getBase()."/".ltrim($file, "/")) ?>" alt=""<?php echo $number ? " loading=\"lazy\"" : "" ?> />
-<?php endforeach ?>
-</div>
-<?php if ($halstuch!="none"): ?>
-<div class="halstuch"<?php if ($halstuch!="default") echo " style=\"background-image:url('".htmlspecialchars($fileLocationHalstuch)."')\"" ?>></div>
-<?php endif ?>
-<?php endif ?>
+<?php $this->yellow->layout("banner") ?>
 <div class="content">
 <div class="main" id="main" role="main">
 <h1><?php echo $this->yellow->page->getHtml("titleContent") ?></h1>

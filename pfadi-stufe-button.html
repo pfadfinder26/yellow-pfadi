@@ -1,0 +1,30 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+// The round button of a section, drawn as SVG from a name, an age and a section:
+// $this->yellow->layout("stufe-button", "Guides & Späher", "10 bis 13 Jahre", "gusp")
+list($name, $title, $alter, $stufe) = $this->yellow->getLayoutArguments();
+$stufe = $this->yellow->lookup->normaliseClass($stufe);
+// the name goes on two lines when it has an "and" in it, like the printed buttons
+$lines = preg_match("/^(.*\s[&+]|.*\sund)\s+(.*)$/u", $title, $matches) ?
+    array(trim($matches[1]), trim($matches[2])) : array(trim($title));
+$lengthMax = 0;
+foreach ($lines as $line) $lengthMax = max($lengthMax, strlenu($line));
+// the name fills the width of the disc, the whole block sits in the middle of it
+$sizeName = min(15, round(150/max(1, $lengthMax), 1));
+$sizeAlter = 7;
+$heightLine = $sizeName*1.15;
+$heightBlock = count($lines)*$heightLine + (is_string_empty($alter) ? 0 : $sizeAlter*2.2);
+$top = round(50 - $heightBlock/2 + $sizeName*0.8, 1);
+?>
+<svg class="button-stufe<?php echo is_string_empty($stufe) ? "" : " ".htmlspecialchars($stufe) ?>" viewBox="0 0 100 100" role="img" aria-label="<?php echo htmlspecialchars(trim("$title $alter")) ?>">
+<circle class="disc" cx="50" cy="50" r="50" />
+<text class="name" x="50" y="<?php echo $top ?>" text-anchor="middle" font-size="<?php echo $sizeName ?>">
+<?php foreach ($lines as $number=>$line): ?>
+<tspan x="50"<?php echo $number ? " dy=\"1.15em\"" : "" ?>><?php echo htmlspecialchars($line) ?></tspan>
+<?php endforeach ?>
+</text>
+<?php if (!is_string_empty($alter)): ?>
+<text class="alter" x="50" y="<?php echo round($top + (count($lines)-1)*$heightLine + $sizeAlter*2.1, 1) ?>" font-size="<?php echo $sizeAlter ?>" text-anchor="middle"><?php echo htmlspecialchars(strtoupperu($alter)) ?></text>
+<?php endif ?>
+</svg>

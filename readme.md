@@ -1,4 +1,4 @@
-# Pfadi 0.1.1
+# Pfadi 0.2.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -102,6 +102,16 @@ becomes a square button with that icon, in the color of the text around it, so i
 footer and in the content. An icon is an SVG mask, to add one put the SVG next to the others and
 write three lines of CSS like the ones under `/* Social links */`.
 
+**Section buttons:** the round button of a section is drawn as SVG from whatever you pass it, so it
+always says what the page says:
+
+    <?php $this->yellow->layout("stufe-button", "Guides & Späher", "10 bis 13 Jahre", "gusp") ?>
+
+Name, age and section: the name breaks into two lines at an `&` or an `und` like the printed
+buttons, the size follows the longest line, and the color comes from the section. Call it from a
+layout, not from a page, because Yellow removes SVG from content. `banner` is a layout of its own
+too, so a layout of your own can show the same banner as the default one.
+
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 
 **Section labels:** `{.stufe.biber}`, `{.stufe.wiwoe}`, `{.stufe.gusp}`, `{.stufe.caex}`,
@@ -135,6 +145,9 @@ The default theme is defined in file `system/extensions/yellow-system.ini`. A di
 ## Acknowledgements
 
 This extension includes Kumbh Sans by the Kumbh Sans project authors. Thank you for the beautiful font.
+
+The handwriting is [Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah) by
+Kimberly Geswein, the second typeface of the PPÖ design next to Kumbh Sans. Thank you as well.
 
 The social icons are [Font Awesome 6 Free](https://fontawesome.com/), `fa6-brands/instagram`,
 `fa6-brands/facebook-f` and `fa6-solid/envelope`, taken from [Iconify](https://iconify.design/) and

@@ -1,4 +1,4 @@
-# Pfadi 0.1.1
+# Pfadi 0.2.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -107,6 +107,17 @@ wird zu einem quadratischen Button mit diesem Zeichen, in der Farbe des Textes r
 roten Fußbereich wie im Inhalt. Ein Icon ist eine SVG-Maske, für ein weiteres die SVG-Datei dazu
 legen und drei Zeilen CSS schreiben wie die unter `/* Social links */`.
 
+**Stufenbuttons:** der runde Button einer Stufe wird als SVG gezeichnet, aus dem, was man ihm gibt,
+und sagt damit immer dasselbe wie die Seite:
+
+    <?php $this->yellow->layout("stufe-button", "Guides & Späher", "10 bis 13 Jahre", "gusp") ?>
+
+Name, Alter und Stufe: der Name bricht bei einem `&` oder `und` auf zwei Zeilen wie bei den
+gedruckten Buttons, die Größe richtet sich nach der längsten Zeile, die Farbe kommt von der Stufe.
+Aufrufen lässt er sich aus einem Layout, nicht aus einer Seite, weil Yellow SVG aus dem Inhalt
+entfernt. Auch `banner` ist ein eigenes Layout, ein eigenes Seitenlayout kann also dasselbe Banner
+zeigen wie das Standardlayout.
+
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 
 **Stufenschilder:** `{.stufe.biber}`, `{.stufe.wiwoe}`, `{.stufe.gusp}`, `{.stufe.caex}`,
@@ -141,6 +152,9 @@ Das Standard-Theme steht in der Datei `system/extensions/yellow-system.ini`. Ein
 ## Danksagungen
 
 Diese Erweiterung enthält Kumbh Sans von den Kumbh-Sans-Projektautoren. Danke für die schöne Schrift.
+
+Die Handschrift ist [Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah) von
+Kimberly Geswein, die zweite Schrift des PPÖ-Designs neben Kumbh Sans. Auch dafür danke.
 
 Die Social-Icons sind [Font Awesome 6 Free](https://fontawesome.com/), `fa6-brands/instagram`,
 `fa6-brands/facebook-f` und `fa6-solid/envelope`, geholt über [Iconify](https://iconify.design/) und
