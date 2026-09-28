@@ -1818,6 +1818,13 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 .ausschreibung dd + dd {
     grid-column: 2;
 }
+.ausschreibung-meta {
+    clear: both;
+    margin: 3rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    text-align: center;
+}
 .ausschreibung .closing {
     clear: both;
     margin: 2rem 0 0;
@@ -1923,7 +1930,8 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung-head {
         margin-bottom: 0.8cm;
     }
-    .calendar-add {
+    .calendar-add,
+    .ausschreibung-meta {
         display: none;
     }
     .ausschreibung-head h1 {

@@ -31,5 +31,26 @@ if ($this->yellow->extension->isExisting("calendar")) {
 <?php echo $eventHtml ?>
 </div>
 <?php echo $page->getContentHtml() ?>
+<?php
+// who wrote it, when, and what it is about, small below the page and never on paper
+$locationStart = $page->getPage("blogStart")->getLocation(true);
+$meta = array();
+if (!is_string_empty($page->get("published"))) $meta[] = $page->getDateHtml("published");
+foreach (preg_split("/\s*,\s*/", $page->get("author")) as $author) {
+    if (is_string_empty($author)) continue;
+    $meta[] = is_string_empty($locationStart) ? htmlspecialchars($author) :
+        "<a href=\"".$locationStart.$this->yellow->lookup->normaliseArguments("author:$author")."\">".
+        htmlspecialchars($author)."</a>";
+}
+foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag) {
+    if (is_string_empty($tag)) continue;
+    $meta[] = is_string_empty($locationStart) ? htmlspecialchars($tag) :
+        "<a href=\"".$locationStart.$this->yellow->lookup->normaliseArguments("tag:$tag")."\">".
+        htmlspecialchars($tag)."</a>";
+}
+?>
+<?php if (!is_array_empty($meta)): ?>
+<p class="ausschreibung-meta"><?php echo implode(" · ", $meta) ?></p>
+<?php endif ?>
 </div>
 </div>
