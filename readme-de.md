@@ -1,4 +1,4 @@
-# Pfadi 0.2.0
+# Pfadi 0.2.1
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 

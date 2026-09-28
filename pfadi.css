@@ -619,6 +619,8 @@ a:focus-visible {
     width: 12rem;
     max-width: 60vw;
     height: auto;
+    overflow: visible;
+    filter: drop-shadow(0 0.15rem 0.4rem rgba(0, 0, 0, 0.3));
 }
 .button-stufe .disc {
     fill: var(--inverse-bg);
