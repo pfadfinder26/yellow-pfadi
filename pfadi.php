@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.9.0";
+    const VERSION = "0.9.1";
     public $yellow;         // access to API
     public $number;         // number of the page in the tree
 
@@ -111,6 +111,18 @@ class YellowPfadi {
             ($text==$email ? $this->getMailObfuscated($text) : htmlspecialchars($text))."</a>";
     }
 
+    // Return a phone number as a link, hidden the same way as a mail address:
+    // the markdown parser leaves a number as it is, a harvester reads both alike
+    public function getPhoneHtml($number, $text = "") {
+        $number = trim($number);
+        if (is_string_empty($number)) return "";
+        if (is_string_empty($text)) $text = $number;
+        // "+43 (0)664 ..." is dialled without the zero in brackets
+        $dial = preg_replace("/[^\d\+]/", "", preg_replace("/\(.*?\)/", "", $number));
+        return "<a href=\"".$this->getMailObfuscated("tel:".$dial)."\">".
+            $this->getMailObfuscated($text)."</a>";
+    }
+
     // Return a text with most characters as entities, the same mix the parser uses
     public function getMailObfuscated($text) {
         $output = "";
@@ -137,6 +149,21 @@ class YellowPfadi {
     // Check if the website can be edited right now
     public function isEditable() {
         return $this->yellow->extension->isExisting("edit") && $this->yellow->extension->get("edit")->editable;
+    }
+
+    // Handle page content element, a phone number that is written in a page
+    public function onParseContentElement($page, $name, $text, $attributes, $type) {
+        if ($name!="phone" || ($type!="block" && $type!="inline")) return null;
+        list($number, $label) = $this->yellow->toolbox->getTextList($text, " ", 2);
+        $number = trim($text);
+        if (is_string_empty($number)) return $this->getErrorHtml("Please add a phone number!");
+        $output = $this->getPhoneHtml($number);
+        return $type=="block" ? "<p>".$output."</p>\n" : $output;
+    }
+
+    // Return error message for authors
+    public function getErrorHtml($text) {
+        return "<p class=\"error\">Pfadi: ".htmlspecialchars($text)."</p>\n";
     }
 
     // Handle page content in HTML format, draw the buttons left as placeholders

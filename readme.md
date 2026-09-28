@@ -1,4 +1,4 @@
-# Pfadi 0.9.0
+# Pfadi 0.9.1
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -178,6 +178,10 @@ markdown parser writes one, most characters as decimal or hex entities. A card t
 instead of writing `mailto:` itself, so an address rendered by a layout is as hard to harvest as one
 written in a page. It stops the crude harvesters, not a determined one: what really keeps an address
 out of the lists is not publishing it, and offering a form instead.
+
+**Phone numbers:** the markdown parser hides mail addresses but leaves a phone number as it is.
+`getPhoneHtml` hides one the same way, and a page writes one as `[phone +43 664 1234567]`. A number
+in brackets, the zero of `+43 (0)664`, is left out of the number that is dialled.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 
