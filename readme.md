@@ -1,4 +1,4 @@
-# Pfadi 0.6.1
+# Pfadi 0.6.2
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -140,7 +140,8 @@ holds the lines at the end, a block `{.note}` the small print below them.
 **Rows that scroll:** a card row with the option `scroll` becomes a row that scrolls sideways, with
 a round button at each side. The buttons stop at both ends, they do not wrap around, and they
 disappear when everything fits anyway. A row starts at the first card that is not marked
-`entry-scheduled`, so cards that wait for their date stand to the left of where the row begins.
+`entry-scheduled`, so cards that wait for their date stand to the left of where the row begins. On
+a narrow screen the two buttons stand below the row instead of on the cards.
 
 **News as cards:** the list of blog entries shows the same cards as an overview elsewhere, with
 the image, the date and the description of an entry. `BlogPaginationLimit` decides how many fit on

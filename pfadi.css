@@ -667,11 +667,20 @@ a:focus-visible {
     display: none;
 }
 @media (max-width: 47.9375rem) {
+    /* on a narrow screen the buttons stand below the row instead of on the cards */
+    .cards-scroller {
+        padding-bottom: 3.5rem;
+    }
+    .cards-button {
+        top: auto;
+        bottom: 0;
+        margin-top: 0;
+    }
     .cards-button-previous {
-        left: -0.5rem;
+        left: calc(50% - 3rem);
     }
     .cards-button-next {
-        right: -0.5rem;
+        right: calc(50% - 3rem);
     }
 }
 
