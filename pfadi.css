@@ -1690,6 +1690,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 .ausschreibung-head h1 {
     margin: 0;
 }
+.ausschreibung .calendar-add {
+    margin: 1rem 0 0;
+}
 .ausschreibung .ausschreibung-termin {
     margin: 0.25rem 0 0;
     font-weight: 700;
@@ -1822,6 +1825,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .ausschreibung-head {
         margin-bottom: 0.8cm;
+    }
+    .calendar-add {
+        display: none;
     }
     .ausschreibung-head h1 {
         font-size: 17pt;

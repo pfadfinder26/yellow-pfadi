@@ -1,4 +1,4 @@
-# Pfadi 0.4.6
+# Pfadi 0.5.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -151,6 +151,11 @@ wie viele auf eine Seite passen.
 `Published`-Datum noch bevorsteht, bis zu diesem Tag. Wer die Website bearbeitet, sieht ihn
 trotzdem, als wartend gekennzeichnet: eine Ausschreibung lässt sich also jetzt schreiben und geht
 von selbst online.
+
+**Der Termin einer Ausschreibung:** verlinkt ein Termin im Kalender auf eine Ausschreibung, zeigt
+die Seite einen Knopf, der diesen Termin speichert, aus der
+[Kalender-Erweiterung](https://github.com/pfadfinder26/yellow-calendar) und nur dann, wenn ein
+Kalender die Seite wirklich nennt.
 
 **Drucken:** gedruckt lässt eine Seite Kopf, Navigation und Fußbereich weg, und eine Ausschreibung
 bekommt den Briefkopf, der aufs Papier gehört: links das Logo der Gruppe, rechts die geteilte Seite

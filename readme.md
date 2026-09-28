@@ -1,4 +1,4 @@
-# Pfadi 0.4.6
+# Pfadi 0.5.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -144,6 +144,10 @@ one page.
 **News that waits:** in the list of blog entries an entry whose `Published` date is still ahead is
 left out, until that day. While someone is editing the website it is shown, marked as waiting, so an
 announcement can be written now and go online by itself.
+
+**The date of an announcement:** when a date in the calendar links to an announcement, the page
+shows a button that saves that date, from the [calendar extension](https://github.com/pfadfinder26/yellow-calendar)
+and only when a calendar really mentions the page.
 
 **Printing:** printed, a page drops the header, the navigation and the footer, and an announcement
 gets the letterhead that belongs on paper: the logo of the group on the left, the shared page

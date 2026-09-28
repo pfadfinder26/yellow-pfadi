@@ -8,6 +8,12 @@ $logo = is_file($this->yellow->system->get("coreMediaDirectory")."images/logo-pr
     "logo-print.png" : "logo.png";
 $fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/".$logo;
 $fileLocationLogo = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/".$logo;
+// when a date in the calendar links to this page, it can be saved from here
+$eventHtml = "";
+if ($this->yellow->extension->isExisting("calendar")) {
+    $eventHtml = $this->yellow->extension->get("calendar")->getPageEventHtml($page,
+        $this->yellow->system->get("calendarUrl"));
+}
 ?>
 <div class="content">
 <div class="main ausschreibung" id="main" role="main">
@@ -22,6 +28,7 @@ $fileLocationLogo = $page->getBase().$this->yellow->system->get("coreMediaLocati
 <?php if (!is_string_empty($page->get("termin"))): ?>
 <p class="ausschreibung-termin"><?php echo $page->getHtml("termin") ?></p>
 <?php endif ?>
+<?php echo $eventHtml ?>
 </div>
 <?php echo $page->getContentHtml() ?>
 </div>
