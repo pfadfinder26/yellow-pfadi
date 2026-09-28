@@ -13,11 +13,30 @@ $image = $page->get("image");
 $fileLocationImage = substru($image, 0, 1)!="/" ?
     $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
     $page->getBase().$image;
+$briefkopfHtml = "<div class=\"ausschreibung-briefkopf\">\n".
+    (is_file($fileNameLogo) ? "<img class=\"ausschreibung-logo\" src=\"".
+        htmlspecialchars($fileLocationLogo)."\" alt=\"\" />\n" : "").
+    "<div class=\"ausschreibung-absender\">".$page->getPage("briefkopf")->getContentHtml()."</div>\n".
+    "</div>\n";
 $contentHtml = $page->getContentHtml();
 if (!is_string_empty($image) && strposu($contentHtml, "ausschreibung-image")===false) {
     $imageHtml = "<img class=\"ausschreibung-image\" src=\"".htmlspecialchars($fileLocationImage)."\" alt=\"\" />\n";
     $contentHtml = strposu($contentHtml, "<dl>")!==false ?
         preg_replace("/<dl>/", $imageHtml."<dl>", $contentHtml, 1) : $imageHtml.$contentHtml;
+}
+if (strposu($contentHtml, "class=\"cloudform\"")!==false) {
+    list($before, $after) = explode("<div class=\"cloudform\"", $contentHtml, 2);
+    $heading = "";
+    if (preg_match("/(<h2[^>]*>(?:(?!<\/h2>).)*<\/h2>)\s*$/s", $before, $matches)) {
+        $heading = $matches[1];
+        $before = substru($before, 0, strlenu($before)-strlenu($matches[0]));
+    }
+    $sheetHtml = "<div class=\"ausschreibung-sheet\">\n".$briefkopfHtml.
+        "<div class=\"ausschreibung-sheet-head\">\n<h2>".$page->getHtml("titleContent")."</h2>\n".
+        (is_string_empty($page->get("termin")) ? "" :
+            "<p class=\"ausschreibung-termin\">".$page->getHtml("termin")."</p>\n")."</div>\n".
+        $heading;
+    $contentHtml = $before.$sheetHtml."<div class=\"cloudform\"".$after."</div>\n";
 }
 // when a date in the calendar links to this page, it can be saved from here
 $eventHtml = "";
@@ -28,12 +47,7 @@ if ($this->yellow->extension->isExisting("calendar")) {
 ?>
 <div class="content">
 <div class="main ausschreibung" id="main" role="main">
-<div class="ausschreibung-briefkopf">
-<?php if (is_file($fileNameLogo)): ?>
-<img class="ausschreibung-logo" src="<?php echo htmlspecialchars($fileLocationLogo) ?>" alt="" />
-<?php endif ?>
-<div class="ausschreibung-absender"><?php echo $page->getPage("briefkopf")->getContentHtml() ?></div>
-</div>
+<?php echo $briefkopfHtml ?>
 <div class="ausschreibung-head">
 <h1><?php echo $page->getHtml("titleContent") ?></h1>
 <?php if (!is_string_empty($page->get("termin"))): ?>

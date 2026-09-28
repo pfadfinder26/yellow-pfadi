@@ -1858,6 +1858,16 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 }
 
 
+/* A form that comes from the cloud, on paper a sheet of its own */
+
+.ausschreibung-sheet {
+    display: contents;
+}
+.ausschreibung-sheet-head {
+    display: none;
+}
+
+
 /* A form that comes from the cloud */
 
 .cloudform {
@@ -2028,23 +2038,28 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .cloudform {
         margin: 0;
     }
-    .cloudform,
-    h2:has(+ .cloudform),
-    h3:has(+ .cloudform) {
+    .ausschreibung-sheet {
+        display: block;
         break-before: page;
     }
-    h2:has(+ .cloudform) + .cloudform,
-    h3:has(+ .cloudform) + .cloudform {
-        break-before: auto;
+    .ausschreibung-sheet-head {
+        display: block;
+        margin-bottom: 0.8cm;
+        text-align: center;
     }
-    h2:has(+ .cloudform),
-    h3:has(+ .cloudform) {
-        margin-top: 0;
+    .ausschreibung-sheet-head h2 {
+        margin: 0;
+        font-size: 15pt;
+    }
+    .ausschreibung-sheet-head .ausschreibung-termin {
+        margin: 0.1cm 0 0;
+        font-weight: 700;
+    }
+    .ausschreibung-sheet > h2 {
+        margin: 0 0 0.5cm;
     }
     .cloudform h3 {
-        margin: 0 0 0.6cm;
-        font-size: 14pt;
-        text-align: center;
+        display: none;
     }
     .cloudform-question {
         margin: 0 0 0.7cm;
