@@ -1,4 +1,4 @@
-# Pfadi 0.5.2
+# Pfadi 0.6.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -142,6 +142,10 @@ als die zwei Spalten, die Ort, Zeit und Kosten nennen. Das Bild des Lagers steht
 selbst, direkt vor dieser Liste, `![](lager.jpg){.ausschreibung-image}`, damit es daneben steht.
 Ein Block `{.closing}` trägt die Zeilen am
 Ende, ein Block `{.note}` das Kleingedruckte darunter.
+
+**Reihen, die scrollen:** eine Kartenreihe mit der Option `scroll` wird zu einer Reihe, die seitlich
+scrollt, mit einem runden Knopf an jeder Seite. Die Knöpfe halten an beiden Enden, sie springen
+nicht zurück, und sie verschwinden, wenn ohnehin alles hineinpasst.
 
 **Neuigkeiten als Karten:** die Liste der Blogeinträge zeigt dieselben Karten wie eine Übersicht
 an anderer Stelle, mit Bild, Datum und Beschreibung eines Eintrags. `BlogPaginationLimit` bestimmt,

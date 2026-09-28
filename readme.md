@@ -1,4 +1,4 @@
-# Pfadi 0.5.2
+# Pfadi 0.6.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -136,6 +136,10 @@ definition list as the two columns that say where, when and what it costs. The i
 goes into the page itself, right before that list, `![](camp.jpg){.ausschreibung-image}`, so it
 stands beside it. A block `{.closing}`
 holds the lines at the end, a block `{.note}` the small print below them.
+
+**Rows that scroll:** a card row with the option `scroll` becomes a row that scrolls sideways, with
+a round button at each side. The buttons stop at both ends, they do not wrap around, and they
+disappear when everything fits anyway.
 
 **News as cards:** the list of blog entries shows the same cards as an overview elsewhere, with
 the image, the date and the description of an entry. `BlogPaginationLimit` decides how many fit on

@@ -148,6 +148,41 @@
         });
     }
 
+    // a row of cards that scrolls sideways gets a button at each side, it stops at both ends
+    function setupCardScroll(row) {
+        var german = (document.documentElement.lang || "").indexOf("de")===0;
+        var scroller = document.createElement("div");
+        scroller.className = "cards-scroller";
+        row.parentNode.insertBefore(scroller, row);
+        scroller.appendChild(row);
+        var buttons = [-1, 1].map(function (direction) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "cards-button cards-button-"+(direction<0 ? "previous" : "next");
+            button.setAttribute("aria-label", direction<0 ?
+                (german ? "Zurück" : "Previous") : (german ? "Weiter" : "Next"));
+            button.addEventListener("click", function () {
+                var card = row.firstElementChild;
+                var step = card ? card.getBoundingClientRect().width+24 : row.clientWidth;
+                row.scrollBy({left: direction*step, behavior: "smooth"});
+            });
+            scroller.appendChild(button);
+            return button;
+        });
+        function update() {
+            var scrollable = row.scrollWidth-row.clientWidth;
+            scroller.classList.toggle("cards-scroller-idle", scrollable<=2);
+            buttons[0].disabled = row.scrollLeft<=2;
+            buttons[1].disabled = row.scrollLeft>=scrollable-2;
+        }
+        row.addEventListener("scroll", update);
+        window.addEventListener("resize", update);
+        update();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".cards-scroll").forEach(setupCardScroll);
+    });
     document.addEventListener("DOMContentLoaded", setupEditRailToggle);
     document.addEventListener("DOMContentLoaded", function () {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

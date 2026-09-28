@@ -598,6 +598,84 @@ a:focus-visible {
     white-space: nowrap;
 }
 
+/* a row of cards that scrolls sideways, with a button at each side */
+
+.cards-scroller {
+    position: relative;
+    margin: 2rem 0;
+}
+.cards-scroll {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+.cards-scroll::-webkit-scrollbar {
+    display: none;
+}
+.cards-scroll > .card {
+    flex: 0 0 min(20rem, 82%);
+    scroll-snap-align: start;
+}
+.cards-button {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    margin-top: -1.25rem;
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--inverse-text);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+.cards-button::before {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    -webkit-mask: var(--icon-twisty) center/0.9rem no-repeat;
+    mask: var(--icon-twisty) center/0.9rem no-repeat;
+}
+.cards-button-previous {
+    left: -1.25rem;
+}
+.cards-button-previous::before {
+    transform: rotate(180deg);
+}
+.cards-button-next {
+    right: -1.25rem;
+}
+.cards-button:hover {
+    background-color: var(--primary-active);
+}
+.cards-button:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+.cards-scroller-idle .cards-button {
+    display: none;
+}
+@media (max-width: 47.9375rem) {
+    .cards-button-previous {
+        left: -0.5rem;
+    }
+    .cards-button-next {
+        right: -0.5rem;
+    }
+}
+
+
 /* a card that is a link as a whole, the links inside it keep working */
 
 .card-link {
