@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.3.2";
+    const VERSION = "0.3.3";
     public $yellow;         // access to API
     public $number;         // number of the page in the tree
 
@@ -21,8 +21,10 @@ class YellowPfadi {
         $this->yellow->language->setDefault("PfadiDelete", "Seite löschen", "de");
         $this->yellow->language->setDefault("PfadiEditPage", "Edit page", "en");
         $this->yellow->language->setDefault("PfadiEditPage", "Seite bearbeiten", "de");
-        $this->yellow->language->setDefault("PfadiStatusPage", "Show or hide page", "en");
-        $this->yellow->language->setDefault("PfadiStatusPage", "Seite zeigen oder verstecken", "de");
+        $this->yellow->language->setDefault("PfadiHidePage", "Hide page", "en");
+        $this->yellow->language->setDefault("PfadiHidePage", "Seite verstecken", "de");
+        $this->yellow->language->setDefault("PfadiShowPage", "Show page", "en");
+        $this->yellow->language->setDefault("PfadiShowPage", "Seite zeigen", "de");
     }
 
     // Handle page extra data, the rail with the editing buttons and the page tree
@@ -76,12 +78,16 @@ class YellowPfadi {
     // Return the buttons of a page in the tree, they show up on hover
     public function getToolsHtml($pageTree) {
         $output = "<span class=\"editrail-tools\">";
+        // the button that shows or hides a page says which of the two it is now
+        $status = $pageTree->isVisible() ? "status" : "status-hidden";
         $tools = array("edit" => "pfadiEditPage", "create" => "pfadiCreate",
-            "status" => "pfadiStatusPage", "delete" => "pfadiDelete");
+            $status => $pageTree->isVisible() ? "pfadiHidePage" : "pfadiShowPage",
+            "delete" => "pfadiDelete");
         foreach ($tools as $tool=>$text) {
             $text = $this->yellow->language->getTextHtml($text);
+            $action = $tool=="status-hidden" ? "status" : $tool;
             $output .= "<a class=\"editrail-tool editrail-tool-".$tool."\" href=\"".
-                htmlspecialchars($pageTree->get("editPageUrl"))."#pfadi-".$tool."\"".
+                htmlspecialchars($pageTree->get("editPageUrl"))."#pfadi-".$action."\"".
                 " title=\"".$text."\" aria-label=\"".$text."\"></a>";
         }
         return $output."</span>";

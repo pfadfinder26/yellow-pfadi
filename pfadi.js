@@ -71,7 +71,9 @@
         setLabel("yellow-pane-delete-bar", rail.getAttribute("data-label-delete"));
         if (!window.yellow || !window.yellow.edit) return;
         keepPaneOpen();
-        processHash();
+        bindTools(rail);
+        processAction(window.location.hash.indexOf("#pfadi-")===0 ?
+            window.location.hash.substring(7) : "", true);
     }
 
     // the bar says "+" and "-", in the rail the buttons say what they do
@@ -94,12 +96,22 @@
         };
     }
 
-    // a button of the page tree leads here, with what it wants in the fragment
-    function processHash() {
-        var action = window.location.hash.indexOf("#pfadi-")===0 ?
-            window.location.hash.substring(7) : "";
+    // a button for the page that is open does not lead anywhere, it acts right away
+    function bindTools(rail) {
+        rail.querySelectorAll(".editrail-tool").forEach(function (tool) {
+            tool.addEventListener("click", function (e) {
+                var url = new URL(tool.href, window.location.href);
+                if (url.pathname!=window.location.pathname) return;
+                e.preventDefault();
+                processAction(url.hash.substring(7), false);
+            });
+        });
+    }
+
+    // a button of the page tree asks for this, in the fragment or right here
+    function processAction(action, fromHash) {
         if (!action) return;
-        window.history.replaceState(null, "", window.location.pathname);
+        if (fromHash) window.history.replaceState(null, "", window.location.pathname);
         if (action=="status") {
             toggleStatus();
         } else if (action=="edit" || action=="create" || action=="delete") {
