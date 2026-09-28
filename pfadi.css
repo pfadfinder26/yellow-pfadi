@@ -353,6 +353,8 @@ a:focus-visible {
 
 .banner {
     display: flex;
+    align-items: flex-start;
+    background-color: var(--band);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -362,13 +364,16 @@ a:focus-visible {
 .banner::-webkit-scrollbar {
     display: none;
 }
+ /* the whole picture is shown: it is as high as it wants to be, up to the height of the
+    banner, and what is left beside it stays in the colour of the band */
 .banner img {
     display: block;
     flex: 0 0 100%;
     scroll-snap-align: center;
     width: 100%;
-    aspect-ratio: 2.5 / 1;
-    object-fit: cover;
+    height: auto;
+    max-height: 26rem;
+    object-fit: contain;
 }
 @media (prefers-reduced-motion: reduce) {
     .banner {

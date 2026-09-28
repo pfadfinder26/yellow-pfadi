@@ -1,4 +1,4 @@
-# Pfadi 0.10.1
+# Pfadi 0.10.2
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -196,6 +196,10 @@ Eine Zahl in Klammern, die Null von `+43 (0)664`, gehört nicht zur gewählten N
 **Das Logo der Gruppe:** eine Datei `images/logo-gruppe.svg` steht links vom Logo des Verbands, im
 Kopf der Seite als weiße Maske, auf dem Papier in ihren eigenen Farben. Ohne die Datei ändert sich
 nichts.
+
+**Banner:** das ganze Bild ist zu sehen, nie ein Ausschnitt. Ein Bild, das höher ist als das
+Banner, steht zwischen zwei Balken in der Farbe des Bandes, ein breiteres macht das Banner
+einfach niedriger und die Seite beginnt weiter oben.
 
 **Bilder, die sich ändern:** das Theme schreibt die Änderungszeit einer Datei in ihre Adresse,
 `gruppe.jpg?v=1790609511`, damit ein neues Bild unter altem Namen geholt und nicht aus dem
