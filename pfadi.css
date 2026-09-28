@@ -1898,6 +1898,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     font-size: 0.8125rem;
 }
 .cloudform input[type="text"],
+.cloudform input[type="email"],
+.cloudform input[type="tel"],
+.cloudform input[type="number"],
 .cloudform input[type="date"],
 .cloudform input[type="time"],
 .cloudform input[type="datetime-local"],
@@ -2031,7 +2034,8 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung-meta,
     .cloudform-submit,
     .cloudform-link,
-    .cloudform-status {
+    .cloudform-status,
+    .cloudform-website {
         display: none;
     }
     /* the form is the sheet that used to be handed out, on a page of its own */
@@ -2066,6 +2070,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         break-inside: avoid;
     }
     .cloudform input[type="text"],
+    .cloudform input[type="email"],
+    .cloudform input[type="tel"],
+    .cloudform input[type="number"],
     .cloudform input[type="date"],
     .cloudform input[type="time"],
     .cloudform input[type="datetime-local"],

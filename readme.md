@@ -1,4 +1,4 @@
-# Pfadi 0.7.1
+# Pfadi 0.7.2
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
