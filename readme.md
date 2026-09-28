@@ -1,4 +1,4 @@
-# Pfadi 0.10.0
+# Pfadi 0.10.1
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -186,6 +186,10 @@ in brackets, the zero of `+43 (0)664`, is left out of the number that is dialled
 **The logo of the group:** a file `images/logo-gruppe.svg` is shown left of the logo of the
 association, in the header as a white mask, on paper in its own colours. Without the file nothing
 changes.
+
+**Images that change:** the theme writes the time a file was changed into its address,
+`gruppe.jpg?v=1790609511`, so a new picture under an old name is fetched instead of taken from the
+browser's memory.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 

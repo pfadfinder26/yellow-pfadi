@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.10.0";
+    const VERSION = "0.10.1";
     public $yellow;         // access to API
     public $number;         // number of the page in the tree
 
@@ -99,6 +99,17 @@ class YellowPfadi {
             $this->yellow->system->get("coreServerScheme"),
             $this->yellow->system->get("coreServerAddress"),
             $this->yellow->system->get("coreServerBase"), $page->location);
+    }
+
+    // Return the address of a media file with the time it was changed, so a new file
+    // under an old name is fetched again instead of taken from the browser
+    public function getMediaUrl($location) {
+        if (is_string_empty($location)) return "";
+        $base = $this->yellow->system->get("coreServerBase");
+        $path = substru($location, 0, strlenu($base))==$base ? substru($location, strlenu($base)) : $location;
+        $fileName = ltrim($path, "/");
+        if (!is_file($fileName)) return $location;
+        return $location."?v=".filemtime($fileName);
     }
 
     // Return a mail address as a link, written the way the markdown parser writes one:
