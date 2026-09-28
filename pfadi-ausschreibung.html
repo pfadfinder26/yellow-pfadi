@@ -1,0 +1,28 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+// An announcement of a camp, laid out like the printed one: title and dates,
+// the invitation, a list of who, where, when and what it costs, and the image
+// of the camp beside it. Settings: Termin, Image, Layout: ausschreibung
+$page = $this->yellow->page;
+$image = $page->get("image");
+$fileLocationImage = substru($image, 0, 1)!="/" ?
+    $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
+    $page->getBase().$image;
+$this->yellow->layout("header");
+?>
+<div class="content">
+<div class="main ausschreibung" id="main" role="main">
+<div class="ausschreibung-head">
+<h1><?php echo $page->getHtml("titleContent") ?></h1>
+<?php if (!is_string_empty($page->get("termin"))): ?>
+<p class="ausschreibung-termin"><?php echo $page->getHtml("termin") ?></p>
+<?php endif ?>
+</div>
+<?php if (!is_string_empty($image)): ?>
+<img class="ausschreibung-image" src="<?php echo htmlspecialchars($fileLocationImage) ?>" alt="" />
+<?php endif ?>
+<?php echo $page->getContentHtml() ?>
+</div>
+</div>
+<?php $this->yellow->layout("footer") ?>

@@ -1122,6 +1122,13 @@ a.calendar-name:focus-visible {
 .entry {
     margin: 0 0 3rem;
 }
+.entry-image {
+    display: block;
+    margin: 1.5rem auto;
+    width: 100%;
+    max-height: 26rem;
+    object-fit: cover;
+}
 .entry-title h1 {
     margin: 0;
     font-size: clamp(1.375rem, 3vw, 1.75rem);
@@ -1671,5 +1678,80 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create):not(#yellow-pane-delete) {
         width: calc(100vw - var(--editrail-now) - 1rem) !important;
+    }
+}
+
+
+/* An announcement of a camp, laid out like the printed one */
+
+.ausschreibung-head {
+    margin-bottom: 2rem;
+    text-align: right;
+}
+.ausschreibung-head h1 {
+    margin: 0;
+    text-align: right;
+}
+.ausschreibung .ausschreibung-termin {
+    margin: 0.25rem 0 0;
+    font-weight: 700;
+}
+.ausschreibung-image {
+    float: right;
+    margin: 0 0 1.5rem 1.5rem;
+    width: 16rem;
+    max-width: 45%;
+}
+.ausschreibung dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1.5rem;
+    margin: 2rem 0;
+}
+.ausschreibung dt {
+    grid-column: 1;
+    font-weight: 400;
+    text-decoration: underline;
+}
+.ausschreibung dd {
+    grid-column: 2;
+    margin: 0;
+}
+.ausschreibung dd + dd {
+    grid-column: 2;
+}
+.ausschreibung .closing {
+    clear: both;
+    margin: 2rem 0 0;
+    font-style: italic;
+    text-align: center;
+}
+.ausschreibung .note {
+    margin: 2rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-style: italic;
+}
+@media screen and (max-width: 40em) {
+    .ausschreibung-head,
+    .ausschreibung-head h1 {
+        text-align: center;
+    }
+    .ausschreibung-image {
+        float: none;
+        margin: 0 auto 1.5rem;
+        width: 100%;
+        max-width: none;
+    }
+    .ausschreibung dl {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+    .ausschreibung dt,
+    .ausschreibung dd {
+        grid-column: 1;
+    }
+    .ausschreibung dt {
+        margin-top: 0.75rem;
     }
 }

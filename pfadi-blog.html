@@ -1,0 +1,37 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+// A blog entry, the image of the entry stands above the title.
+$page = $this->yellow->page;
+$image = $page->get("image");
+$fileLocationImage = substru($image, 0, 1)!="/" ?
+    $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
+    $page->getBase().$image;
+$class = "entry";
+foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag) {
+    if (!is_string_empty($tag)) $class .= " tag-".$this->yellow->lookup->normaliseClass($tag);
+}
+$locationStart = $page->getPage("blogStart")->getLocation(true);
+$this->yellow->layout("header");
+?>
+<div class="content">
+<div class="main" id="main" role="main">
+<div class="<?php echo htmlspecialchars($class) ?>">
+<?php if (!is_string_empty($image)): ?>
+<img class="entry-image" src="<?php echo htmlspecialchars($fileLocationImage) ?>" alt="" />
+<?php endif ?>
+<div class="entry-title"><h1><?php echo $page->getHtml("titleContent") ?></h1></div>
+<div class="entry-meta"><p><?php echo $page->getDateHtml("published") ?> <?php echo $this->yellow->language->getTextHtml("blogBy") ?> <?php $number = 0; foreach (preg_split("/\s*,\s*/", $page->get("author")) as $author): ?><?php echo $number++ ? ", " : "" ?><a href="<?php echo $locationStart.$this->yellow->lookup->normaliseArguments("author:$author") ?>"><?php echo htmlspecialchars($author) ?></a><?php endforeach ?></p></div>
+<div class="entry-content"><?php echo $page->getContentHtml() ?></div>
+<?php echo $page->getExtraHtml("profile") ?>
+<?php echo $page->getExtraHtml("link") ?>
+<?php if ($page->isExisting("tag")): ?>
+<div class="entry-tags">
+<p><?php echo $this->yellow->language->getTextHtml("blogTag") ?> <?php $number = 0; foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag): ?><?php echo $number++ ? ", " : "" ?><a href="<?php echo $locationStart.$this->yellow->lookup->normaliseArguments("tag:$tag") ?>"><?php echo htmlspecialchars($tag) ?></a><?php endforeach ?></p>
+</div>
+<?php endif ?>
+<?php echo $page->getExtraHtml("comment") ?>
+</div>
+</div>
+</div>
+<?php $this->yellow->layout("footer") ?>
