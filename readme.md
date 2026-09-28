@@ -1,4 +1,4 @@
-# Pfadi 0.3.0
+# Pfadi 0.3.1
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -119,8 +119,11 @@ default one.
 
 **Editing:** with the [edit extension](https://github.com/annaesvensson/yellow-edit) installed, an
 editor gets a rail at the right edge of the window instead of the bar at the top: it stays in place
-while scrolling, holds the editing buttons and a button to leave editing, and expands into a page
-tree that shows the unlisted pages too. The edit window covers half the screen on a desktop.
+while scrolling, holds the editing buttons and a button that leaves editing without logging out,
+and expands into a page tree that shows the unlisted pages too. The rail remembers whether it was
+expanded, branches of the tree can be collapsed, and a page in the tree shows four buttons when the
+mouse is over it: edit it, add a page, show or hide it, delete it. The window that edits a page is
+centred in the space next to the rail and stays open when something next to it is clicked.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 

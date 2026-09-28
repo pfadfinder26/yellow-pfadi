@@ -3,8 +3,9 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.3.0";
+    const VERSION = "0.3.1";
     public $yellow;         // access to API
+    public $number;         // number of the page in the tree
 
     // Handle initialisation
     public function onLoad($yellow) {
@@ -14,38 +15,84 @@ class YellowPfadi {
         $this->yellow->language->setDefault("PfadiPages", "Seiten", "de");
         $this->yellow->language->setDefault("PfadiExit", "Leave editing", "en");
         $this->yellow->language->setDefault("PfadiExit", "Bearbeiten beenden", "de");
+        $this->yellow->language->setDefault("PfadiCreate", "New page", "en");
+        $this->yellow->language->setDefault("PfadiCreate", "Neue Seite", "de");
+        $this->yellow->language->setDefault("PfadiDelete", "Delete page", "en");
+        $this->yellow->language->setDefault("PfadiDelete", "Seite löschen", "de");
+        $this->yellow->language->setDefault("PfadiEditPage", "Edit page", "en");
+        $this->yellow->language->setDefault("PfadiEditPage", "Seite bearbeiten", "de");
+        $this->yellow->language->setDefault("PfadiStatusPage", "Show or hide page", "en");
+        $this->yellow->language->setDefault("PfadiStatusPage", "Seite zeigen oder verstecken", "de");
     }
 
     // Handle page extra data, the rail with the editing buttons and the page tree
     public function onParsePageExtra($page, $name) {
         if ($name!="footer" || !$this->isEditable()) return null;
-        $output = "<div class=\"editrail\" id=\"editrail\">\n";
+        $this->number = 0;
+        $output = "<div class=\"editrail\" id=\"editrail\"".
+            " data-label-create=\"".$this->yellow->language->getTextHtml("pfadiCreate")."\"".
+            " data-label-delete=\"".$this->yellow->language->getTextHtml("pfadiDelete")."\">\n";
         $output .= "<input class=\"editrail-toggle\" type=\"checkbox\" id=\"editrail-toggle\" />\n";
         $output .= "<label class=\"editrail-item editrail-expand\" for=\"editrail-toggle\">".
             $this->yellow->language->getTextHtml("pfadiPages")."</label>\n";
         $output .= "<div class=\"editrail-actions\"></div>\n";
-        $output .= "<div class=\"editrail-tree\">\n".$this->getTreeHtml($this->yellow->content->getRootLocation($page->location), $page)."</div>\n";
-        $output .= "<a class=\"editrail-item editrail-exit\" href=\"#\" data-action=\"submit\" data-arguments=\"action:logout\">".
+        $output .= "<div class=\"editrail-tree\">\n".
+            $this->getTreeHtml($this->yellow->content->getRootLocation($page->location))."</div>\n";
+        $output .= "<a class=\"editrail-item editrail-exit\" href=\"".$this->getLocationPlain($page)."\">".
             $this->yellow->language->getTextHtml("pfadiExit")."</a>\n";
         $output .= "</div>\n";
         return $output;
     }
 
     // Return page tree HTML, the unlisted pages are shown too
-    public function getTreeHtml($location, $page) {
+    public function getTreeHtml($location) {
         $pages = $this->yellow->content->getChildren($location, true);
         if (count($pages)==0) return "";
         $output = "<ul>\n";
         foreach ($pages as $pageTree) {
-            $class = array();
+            $treeHtml = $this->getTreeHtml($pageTree->getLocation());
+            $id = "editrail-branch-".(++$this->number);
+            $output .= "<li>";
+            if (!is_string_empty($treeHtml)) {
+                $output .= "<input class=\"editrail-branch\" type=\"checkbox\" id=\"".$id."\" checked />";
+            }
+            $output .= "<span class=\"editrail-page\">";
+            if (!is_string_empty($treeHtml)) {
+                $output .= "<label class=\"editrail-twisty\" for=\"".$id."\" aria-hidden=\"true\"></label>";
+            }
+            $class = array("editrail-title");
             if ($pageTree->isActive()) $class[] = "active";
             if (!$pageTree->isVisible()) $class[] = "unlisted";
-            $output .= "<li><a".(count($class) ? " class=\"".implode(" ", $class)."\"" : "").
-                " href=\"".$pageTree->getLocation(true)."\">".$pageTree->getHtml("title")."</a>";
-            $output .= $this->getTreeHtml($pageTree->getLocation(), $page);
+            $output .= "<a class=\"".implode(" ", $class)."\" href=\"".$pageTree->getLocation(true)."\">".
+                $pageTree->getHtml("title")."</a>";
+            $output .= $this->getToolsHtml($pageTree);
+            $output .= "</span>";
+            $output .= $treeHtml;
             $output .= "</li>\n";
         }
         return $output."</ul>\n";
+    }
+
+    // Return the buttons of a page in the tree, they show up on hover
+    public function getToolsHtml($pageTree) {
+        $output = "<span class=\"editrail-tools\">";
+        $tools = array("edit" => "pfadiEditPage", "create" => "pfadiCreate",
+            "status" => "pfadiStatusPage", "delete" => "pfadiDelete");
+        foreach ($tools as $tool=>$text) {
+            $text = $this->yellow->language->getTextHtml($text);
+            $output .= "<a class=\"editrail-tool editrail-tool-".$tool."\" href=\"".
+                htmlspecialchars($pageTree->get("editPageUrl"))."#pfadi-".$tool."\"".
+                " title=\"".$text."\" aria-label=\"".$text."\"></a>";
+        }
+        return $output."</span>";
+    }
+
+    // Return the page location without the editing prefix
+    public function getLocationPlain($page) {
+        return $this->yellow->lookup->normaliseUrl(
+            $this->yellow->system->get("coreServerScheme"),
+            $this->yellow->system->get("coreServerAddress"),
+            $this->yellow->system->get("coreServerBase"), $page->location);
     }
 
     // Check if the website can be edited right now

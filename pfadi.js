@@ -67,7 +67,73 @@
         var bar = document.getElementById("yellow-bar");
         if (!rail || !bar) return;
         rail.querySelector(".editrail-actions").appendChild(bar);
-        if (window.yellow && window.yellow.edit) window.yellow.edit.bindActions(rail);
+        setLabel("yellow-pane-create-bar", rail.getAttribute("data-label-create"));
+        setLabel("yellow-pane-delete-bar", rail.getAttribute("data-label-delete"));
+        if (!window.yellow || !window.yellow.edit) return;
+        keepPaneOpen();
+        processHash();
+    }
+
+    // the bar says "+" and "-", in the rail the buttons say what they do
+    function setLabel(id, text) {
+        var element = document.getElementById(id);
+        if (element && text) element.textContent = text;
+    }
+
+    // clicking next to the window that edits a page should not throw the text away
+    function keepPaneOpen() {
+        var edit = window.yellow.edit;
+        var click = edit.click;
+        edit.click = function (e) {
+            var modal = this.paneId=="yellow-pane-edit" || this.paneId=="yellow-pane-create" ||
+                this.paneId=="yellow-pane-delete";
+            if (!modal) return click.call(this, e);
+            if (this.popupId && !document.getElementById(this.popupId).contains(e.target)) {
+                this.hidePopup(this.popupId, true);
+            }
+        };
+    }
+
+    // a button of the page tree leads here, with what it wants in the fragment
+    function processHash() {
+        var action = window.location.hash.indexOf("#pfadi-")===0 ?
+            window.location.hash.substring(7) : "";
+        if (!action) return;
+        window.history.replaceState(null, "", window.location.pathname);
+        if (action=="status") {
+            toggleStatus();
+        } else if (action=="edit" || action=="create" || action=="delete") {
+            window.yellow.edit.processAction(action, "none");
+        }
+    }
+
+    // shows or hides a page, the same way the edit extension saves a page
+    function toggleStatus() {
+        var page = window.yellow.page;
+        var raw = page.rawDataSource;
+        if (!raw) return;
+        var lines = raw.split(/\r?\n/);
+        var end = 0;
+        for (var i = 1; i<lines.length; i++) {
+            if (lines[i].trim()=="---") { end = i; break; }
+        }
+        if (lines[0].trim()!="---" || !end) return;
+        var found = -1;
+        for (var j = 1; j<end; j++) {
+            if (/^status\s*:/i.test(lines[j])) found = j;
+        }
+        if (found!==-1) {
+            lines.splice(found, 1);
+        } else {
+            lines.splice(end, 0, "Status: unlisted");
+        }
+        window.yellow.toolbox.submitForm({
+            "action": "edit",
+            "yellowcsrftoken": window.yellow.edit.getCookie("yellowcsrftoken"),
+            "rawdatasource": raw,
+            "rawdataedit": lines.join(page.rawDataEndOfLine=="crlf" ? "\r\n" : "\n"),
+            "rawdataendofline": page.rawDataEndOfLine
+        });
     }
 
     document.addEventListener("DOMContentLoaded", setupEditRailToggle);

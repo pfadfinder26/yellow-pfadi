@@ -1,4 +1,4 @@
-# Pfadi 0.3.0
+# Pfadi 0.3.1
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -125,8 +125,11 @@ wie das Standardlayout.
 
 **Bearbeiten:** mit der [Edit-Erweiterung](https://github.com/annaesvensson/yellow-edit) bekommen
 Redakteur*innen statt der Leiste oben eine Leiste am rechten Rand: sie bleibt beim Scrollen stehen,
-enthält die Knöpfe zum Bearbeiten und einen zum Beenden, und ausgeklappt zeigt sie einen Seitenbaum,
-in dem auch die unlisted Seiten stehen. Das Bearbeitenfenster nimmt am Desktop die halbe Breite ein.
+enthält die Knöpfe zum Bearbeiten und einen, der das Bearbeiten beendet, ohne abzumelden, und
+ausgeklappt zeigt sie einen Seitenbaum, in dem auch die unlisted Seiten stehen. Die Leiste merkt
+sich, ob sie ausgeklappt war, Äste lassen sich einklappen, und eine Seite im Baum zeigt unter der
+Maus vier Knöpfe: bearbeiten, Seite hinzufügen, zeigen oder verstecken, löschen. Das
+Bearbeitenfenster steht mittig neben der Leiste und bleibt offen, wenn daneben geklickt wird.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 
