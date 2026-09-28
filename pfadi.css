@@ -1424,7 +1424,9 @@ body:has(.editrail) .page {
     opacity: 0;
 }
 .editrail a,
-.editrail .editrail-item {
+.editrail .editrail-item,
+.editrail #yellow-pane-create-bar,
+.editrail #yellow-pane-delete-bar {
     display: block;
     position: relative;
     padding: 0.7rem 0.75rem 0.7rem var(--editrail);
@@ -1591,22 +1593,26 @@ body:has(.editrail) > #yellow-bar {
     height: 100%;
     margin: 0;
     background-color: currentColor;
-    -webkit-mask: center/0.9rem no-repeat;
-    mask: center/0.9rem no-repeat;
+    -webkit-mask-size: 0.9rem;
+    mask-size: 0.9rem;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
-.editrail-tool-edit::before {
+.editrail .editrail-tool-edit::before {
     -webkit-mask-image: var(--icon-edit);
     mask-image: var(--icon-edit);
 }
-.editrail-tool-create::before {
+.editrail .editrail-tool-create::before {
     -webkit-mask-image: var(--icon-create);
     mask-image: var(--icon-create);
 }
-.editrail-tool-status::before {
+.editrail .editrail-tool-status::before {
     -webkit-mask-image: var(--icon-status);
     mask-image: var(--icon-status);
 }
-.editrail-tool-delete::before {
+.editrail .editrail-tool-delete::before {
     -webkit-mask-image: var(--icon-delete);
     mask-image: var(--icon-delete);
 }
