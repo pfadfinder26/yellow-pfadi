@@ -647,18 +647,13 @@ a:focus-visible {
 .button-stufe .alter {
     fill: #fff;
 }
-.button-stufe.wiwoe .name,
-.button-stufe.wiwoe .alter {
-    fill: #000;
-}
 .button-stufe .name {
     font-family: var(--font-hand);
 }
 .button-stufe .alter {
     font-family: var(--font);
-    font-size: 7px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 /* Factsheet, a section button next to a list of facts */
