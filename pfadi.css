@@ -652,7 +652,7 @@ a:focus-visible {
 }
 .button-stufe .alter {
     font-family: var(--font);
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0.02em;
 }
 
@@ -701,7 +701,6 @@ a:focus-visible {
 }
 .stufe.wiwoe {
     background-color: var(--wiwoe);
-    color: #000;
 }
 .stufe.gusp {
     background-color: var(--gusp);
@@ -721,11 +720,6 @@ a.stufe:focus-visible {
     color: #fff;
     text-decoration: none;
     transition: box-shadow 0.2s ease;
-}
-a.stufe.wiwoe,
-a.stufe.wiwoe:hover,
-a.stufe.wiwoe:focus-visible {
-    color: #000;
 }
 a.stufe:hover,
 a.stufe:focus-visible {
