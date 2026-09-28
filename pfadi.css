@@ -1939,6 +1939,14 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     display: block;
     margin-bottom: 0.25rem;
 }
+.cloudform-options-short {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5rem;
+}
+.cloudform-options-short label {
+    margin-bottom: 0;
+}
 .cloudform-options input {
     margin-right: 0.5rem;
 }
@@ -1990,7 +1998,15 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 @media print {
     @page {
         size: A4;
-        margin: 18mm 16mm;
+        margin: 0;
+    }
+    .ausschreibung.main {
+        padding: 18mm 16mm;
+        box-sizing: border-box;
+    }
+    .ausschreibung .ausschreibung-sheet {
+        /* the sheet begins at the top of its own page and brings that margin along */
+        padding-top: 18mm;
     }
     body {
         background-color: #fff;
