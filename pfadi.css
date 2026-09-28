@@ -1958,6 +1958,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     color: var(--text-muted);
     font-style: italic;
 }
+.cloudform-again {
+    margin: 1rem 0 0;
+}
 .cloudform-website {
     position: absolute;
     left: -9999px;
@@ -2101,6 +2104,9 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .cloudform-file {
     color: var(--text-muted);
     font-style: italic;
+}
+.cloudform-again {
+    margin: 1rem 0 0;
 }
 .cloudform-website {
         display: none;
