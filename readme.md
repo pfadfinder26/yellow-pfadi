@@ -1,4 +1,4 @@
-# Pfadi 0.2.3
+# Pfadi 0.2.4
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -109,8 +109,13 @@ always says what the page says:
 
 Name, age and section: the name breaks into two lines at an `&` or an `und` like the printed
 buttons, the size follows the longest line, and the color comes from the section. Call it from a
-layout, not from a page, because Yellow removes SVG from content. `banner` is a layout of its own
-too, so a layout of your own can show the same banner as the default one.
+layout, not from a page, because Yellow removes SVG from content. In a card or another piece of
+content leave a placeholder instead, it is replaced by the button of that page:
+
+    <span data-stufe-button="/stufen/gusp/"></span>
+
+`banner` is a layout of its own too, so a layout of your own can show the same banner as the
+default one.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 

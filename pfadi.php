@@ -3,13 +3,27 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.2.3";
+    const VERSION = "0.2.4";
     public $yellow;         // access to API
 
     // Handle initialisation
     public function onLoad($yellow) {
         $this->yellow = $yellow;
         $this->yellow->system->setDefault("pfadiHalstuch", "default");
+    }
+
+    // Handle page content in HTML format, draw the buttons left as placeholders
+    // the content filter removes SVG, so the button is drawn after that
+    public function onParseContentHtml($page, $text) {
+        if (strposu($text, "data-stufe-button")===false) return null;
+        return preg_replace_callback("/<span data-stufe-button=\"(.*?)\"><\/span>/", function ($matches) {
+            $pageButton = $this->yellow->content->find(html_entity_decode($matches[1], ENT_QUOTES, "UTF-8"));
+            if (is_null($pageButton)) return "";
+            ob_start();
+            $this->yellow->layout("stufe-button", $pageButton->get("title"),
+                $pageButton->get("alter"), $pageButton->get("stufe"));
+            return ob_get_clean();
+        }, $text);
     }
 
     // Handle update

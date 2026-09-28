@@ -612,6 +612,21 @@ a:focus-visible {
 }
 
 
+/* a card that shows the section as its round button */
+
+.card-button {
+    padding-top: 1.5rem;
+}
+.card-button .button-stufe {
+    margin: 0 auto 1.25rem;
+    width: 11rem;
+    max-width: 80%;
+}
+.card-button .stretch {
+    display: block;
+}
+
+
 /* The button of a section, drawn as SVG from the page settings */
 
 .button-stufe {

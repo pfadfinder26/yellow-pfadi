@@ -1,4 +1,4 @@
-# Pfadi 0.2.3
+# Pfadi 0.2.4
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -115,8 +115,13 @@ und sagt damit immer dasselbe wie die Seite:
 Name, Alter und Stufe: der Name bricht bei einem `&` oder `und` auf zwei Zeilen wie bei den
 gedruckten Buttons, die Größe richtet sich nach der längsten Zeile, die Farbe kommt von der Stufe.
 Aufrufen lässt er sich aus einem Layout, nicht aus einer Seite, weil Yellow SVG aus dem Inhalt
-entfernt. Auch `banner` ist ein eigenes Layout, ein eigenes Seitenlayout kann also dasselbe Banner
-zeigen wie das Standardlayout.
+entfernt. In einer Karte oder anderem Inhalt setzt man stattdessen einen Platzhalter, an seine
+Stelle kommt der Button dieser Seite:
+
+    <span data-stufe-button="/stufen/gusp/"></span>
+
+Auch `banner` ist ein eigenes Layout, ein eigenes Seitenlayout kann also dasselbe Banner zeigen
+wie das Standardlayout.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 
