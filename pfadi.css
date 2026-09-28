@@ -1387,19 +1387,6 @@ a.calendar-name:focus-visible {
         transition: none;
     }
 }
-@media print {
-    .header,
-    .footer {
-        position: static;
-        background: none;
-        color: inherit;
-    }
-    .navigation,
-    .navigation-button,
-    .halstuch {
-        display: none;
-    }
-}
 
 /* Custom */
 
@@ -1684,13 +1671,16 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 
 /* An announcement of a camp, laid out like the printed one */
 
+.ausschreibung-briefkopf {
+    display: none;
+}
+
 .ausschreibung-head {
     margin-bottom: 2rem;
-    text-align: right;
+    text-align: center;
 }
 .ausschreibung-head h1 {
     margin: 0;
-    text-align: right;
 }
 .ausschreibung .ausschreibung-termin {
     margin: 0.25rem 0 0;
@@ -1698,7 +1688,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 }
 .ausschreibung-image {
     float: right;
-    margin: 0 0 1.5rem 1.5rem;
+    margin: 3.5rem 0 1.5rem 1.5rem;
     width: 16rem;
     max-width: 45%;
 }
@@ -1733,10 +1723,6 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     font-style: italic;
 }
 @media screen and (max-width: 40em) {
-    .ausschreibung-head,
-    .ausschreibung-head h1 {
-        text-align: center;
-    }
     .ausschreibung-image {
         float: none;
         margin: 0 auto 1.5rem;
@@ -1753,5 +1739,82 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     }
     .ausschreibung dt {
         margin-top: 0.75rem;
+    }
+}
+
+
+/* On paper, an announcement looks like the one that is handed out */
+
+@media print {
+    @page {
+        size: A4;
+        margin: 18mm 16mm;
+    }
+    body {
+        background-color: #fff;
+        color: #000;
+        font-size: 11pt;
+    }
+    .header,
+    .footer,
+    .banner,
+    .halstuch,
+    .navigation,
+    .navigation-button,
+    .editrail,
+    .entry-tags,
+    #yellow-bar {
+        display: none !important;
+    }
+    .page,
+    .content,
+    .main {
+        padding: 0;
+        max-width: none;
+    }
+    h1,
+    h2,
+    h3,
+    .heading {
+        color: #000;
+    }
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+    .ausschreibung-briefkopf {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 1.5cm;
+    }
+    .ausschreibung-logo {
+        width: 6cm;
+        height: auto;
+    }
+    .ausschreibung-absender {
+        font-size: 10pt;
+        line-height: 1.4;
+        text-align: right;
+    }
+    .ausschreibung-absender p {
+        margin: 0 0 0.4rem;
+    }
+    .ausschreibung-head h1 {
+        font-size: 18pt;
+    }
+    .ausschreibung-image {
+        width: 6.5cm;
+        margin-top: 2.5rem;
+    }
+    .ausschreibung dl,
+    .ausschreibung dt,
+    .ausschreibung dd,
+    .ausschreibung .closing {
+        break-inside: avoid;
+    }
+    .ausschreibung .note {
+        color: #000;
     }
 }
