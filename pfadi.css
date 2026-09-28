@@ -1688,7 +1688,7 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 }
 .ausschreibung-image {
     float: right;
-    margin: 3.5rem 0 1.5rem 1.5rem;
+    margin: 0 0 1.5rem 1.5rem;
     width: 16rem;
     max-width: 45%;
 }
@@ -1753,7 +1753,12 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     body {
         background-color: #fff;
         color: #000;
-        font-size: 11pt;
+        font-size: 10.5pt;
+        line-height: 1.35;
+    }
+    p,
+    .ausschreibung dd {
+        margin: 0 0 0.5em;
     }
     .header,
     .footer,
@@ -1801,12 +1806,28 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
     .ausschreibung-absender p {
         margin: 0 0 0.4rem;
     }
+    .ausschreibung-briefkopf {
+        margin-bottom: 1cm;
+    }
+    .ausschreibung-head {
+        margin-bottom: 0.8cm;
+    }
     .ausschreibung-head h1 {
-        font-size: 18pt;
+        font-size: 17pt;
+    }
+    .ausschreibung dl {
+        margin: 0.6cm 0;
+        gap: 0.35em 1.2cm;
     }
     .ausschreibung-image {
-        width: 6.5cm;
-        margin-top: 2.5rem;
+        width: 6cm;
+        margin: 0 0 0.5cm 1cm;
+    }
+    .ausschreibung .closing {
+        margin-top: 0.8cm;
+    }
+    .ausschreibung .note {
+        margin-top: 0.6cm;
     }
     .ausschreibung dl,
     .ausschreibung dt,

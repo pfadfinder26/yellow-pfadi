@@ -1,4 +1,4 @@
-# Pfadi 0.4.1
+# Pfadi 0.4.2
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -135,8 +135,10 @@ Bearbeitenfenster steht mittig neben der Leiste und bleibt offen, wenn daneben g
 das `Image` eines Eintrags über seinem Titel.
 
 **Ausschreibungen:** `Layout: ausschreibung` setzt eine Seite wie eine gedruckte Ausschreibung:
-Titel und `Termin` des Lagers rechts, das Bild des Lagers neben dem Text, und eine Definitionsliste
-als die zwei Spalten, die Ort, Zeit und Kosten nennen. Ein Block `{.closing}` trägt die Zeilen am
+Titel und `Termin` des Lagers über dem Text und eine Definitionsliste
+als die zwei Spalten, die Ort, Zeit und Kosten nennen. Das Bild des Lagers steht in der Seite
+selbst, direkt vor dieser Liste, `![](lager.jpg){.ausschreibung-image}`, damit es daneben steht.
+Ein Block `{.closing}` trägt die Zeilen am
 Ende, ein Block `{.note}` das Kleingedruckte darunter.
 
 **Drucken:** gedruckt lässt eine Seite Kopf, Navigation und Fußbereich weg, und eine Ausschreibung
