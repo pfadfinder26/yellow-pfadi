@@ -1,38 +1,46 @@
 <?php
 // Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
-// The list of blog entries, an entry waits for its publication date. While
-// someone is editing the website the entries that wait are shown as well.
+// The list of blog entries, as the same cards that show them elsewhere. An
+// entry waits for its publication date, while someone is editing the website
+// the entries that wait are shown as well.
 $editable = $this->yellow->extension->isExisting("edit") &&
     $this->yellow->extension->get("edit")->editable;
 $pages = new YellowPageCollection($this->yellow);
 foreach ($this->yellow->page->getPages("blog") as $pageEntry) {
-    $scheduled = strtotime($pageEntry->get("published"))>time();
-    if (!$scheduled || $editable) $pages->append($pageEntry);
+    if (strtotime($pageEntry->get("published"))<=time() || $editable) $pages->append($pageEntry);
 }
 $pages = $pages->paginate($this->yellow->system->get("blogPaginationLimit"));
-$locationStart = $this->yellow->page->getLocation(true);
 $this->yellow->layout("header");
 ?>
 <div class="content">
 <div class="main" id="main" role="main">
-<?php if ($this->yellow->page->get("blogWithFilter")): ?>
 <h1><?php echo $this->yellow->page->getHtml("titleContent") ?></h1>
-<?php endif ?>
+<?php echo $this->yellow->page->getContentHtml() ?>
+<div class="cards">
 <?php foreach ($pages as $pageEntry): ?>
 <?php
-$class = "entry";
-foreach (preg_split("/\s*,\s*/", $pageEntry->get("tag")) as $tag) {
-    if (!is_string_empty($tag)) $class .= " tag-".$this->yellow->lookup->normaliseClass($tag);
-}
+$image = $pageEntry->get("image");
+$fileLocationImage = substru($image, 0, 1)!="/" ?
+    $pageEntry->getBase().$this->yellow->system->get("coreImageLocation").$image :
+    $pageEntry->getBase().$image;
+$class = "card card-link";
 if (strtotime($pageEntry->get("published"))>time()) $class .= " entry-scheduled";
+$description = $pageEntry->get("description");
+if (is_string_empty($description)) {
+    $description = $this->yellow->toolbox->createTextDescription($pageEntry->getContentHtml(), 150);
+}
 ?>
 <div class="<?php echo htmlspecialchars($class) ?>">
-<div class="entry-title"><h1><a href="<?php echo $pageEntry->getLocation(true) ?>"><?php echo $pageEntry->getHtml("title") ?></a></h1></div>
-<div class="entry-meta"><p><?php echo $pageEntry->getDateHtml("published") ?> <?php echo $this->yellow->language->getTextHtml("blogBy") ?> <?php $number = 0; foreach (preg_split("/\s*,\s*/", $pageEntry->get("author")) as $author): ?><?php echo $number++ ? ", " : "" ?><a href="<?php echo $locationStart.$this->yellow->lookup->normaliseArguments("author:$author") ?>"><?php echo htmlspecialchars($author) ?></a><?php endforeach ?></p></div>
-<div class="entry-content"><?php echo $this->yellow->toolbox->createTextDescription($pageEntry->getContentHtml(), 0, false, "<!--more-->", "<a href=\"".$pageEntry->getLocation(true)."\">".$this->yellow->language->getTextHtml("blogMore")."</a>") ?></div>
+<?php if (!is_string_empty($image)): ?>
+<img src="<?php echo htmlspecialchars($fileLocationImage) ?>" alt="" loading="lazy" />
+<?php endif ?>
+<h3><a class="stretch" href="<?php echo $pageEntry->getLocation(true) ?>"><?php echo $pageEntry->getHtml("title") ?></a></h3>
+<p class="date"><?php echo $pageEntry->getDateHtml("published") ?></p>
+<p><?php echo htmlspecialchars($description) ?></p>
 </div>
 <?php endforeach ?>
+</div>
 <?php $this->yellow->layout("pagination", $pages) ?>
 </div>
 </div>
