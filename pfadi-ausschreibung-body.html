@@ -1,0 +1,28 @@
+<?php
+// Pfadi extension, https://github.com/pfadfinder26/yellow-pfadi
+// Based on Datenstrom Yellow, https://datenstrom.se/yellow/
+// The body of an announcement, used by the layouts "ausschreibung" and "blog"
+$page = $this->yellow->page;
+// on paper the logo of the header is white on white, a logo-print.png is used instead
+$logo = is_file($this->yellow->system->get("coreMediaDirectory")."images/logo-print.png") ?
+    "logo-print.png" : "logo.png";
+$fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/".$logo;
+$fileLocationLogo = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/".$logo;
+?>
+<div class="content">
+<div class="main ausschreibung" id="main" role="main">
+<div class="ausschreibung-briefkopf">
+<?php if (is_file($fileNameLogo)): ?>
+<img class="ausschreibung-logo" src="<?php echo htmlspecialchars($fileLocationLogo) ?>" alt="" />
+<?php endif ?>
+<div class="ausschreibung-absender"><?php echo $page->getPage("briefkopf")->getContentHtml() ?></div>
+</div>
+<div class="ausschreibung-head">
+<h1><?php echo $page->getHtml("titleContent") ?></h1>
+<?php if (!is_string_empty($page->get("termin"))): ?>
+<p class="ausschreibung-termin"><?php echo $page->getHtml("termin") ?></p>
+<?php endif ?>
+</div>
+<?php echo $page->getContentHtml() ?>
+</div>
+</div>

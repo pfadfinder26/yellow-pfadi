@@ -13,6 +13,12 @@ foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag) {
 }
 $locationStart = $page->getPage("blogStart")->getLocation(true);
 $this->yellow->layout("header");
+// an entry that announces a camp is laid out like the printed announcement
+if (!is_string_empty($page->get("ausschreibung"))) {
+    $this->yellow->layout("ausschreibung-body");
+    $this->yellow->layout("footer");
+    return;
+}
 ?>
 <div class="content">
 <div class="main" id="main" role="main">

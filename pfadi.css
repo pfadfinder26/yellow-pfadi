@@ -1122,6 +1122,11 @@ a.calendar-name:focus-visible {
 .entry {
     margin: 0 0 3rem;
 }
+.entry-scheduled {
+    opacity: 0.7;
+    border-left: 3px solid var(--border);
+    padding-left: 1rem;
+}
 .entry-image {
     display: block;
     margin: 1.5rem auto;
