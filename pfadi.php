@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.8.9";
+    const VERSION = "0.9.0";
     public $yellow;         // access to API
     public $number;         // number of the page in the tree
 
@@ -99,6 +99,39 @@ class YellowPfadi {
             $this->yellow->system->get("coreServerScheme"),
             $this->yellow->system->get("coreServerAddress"),
             $this->yellow->system->get("coreServerBase"), $page->location);
+    }
+
+    // Return a mail address as a link, written the way the markdown parser writes one:
+    // most characters as decimal or hex entities, so the simple harvesters find nothing
+    public function getMailHtml($email, $text = "") {
+        $email = trim($email);
+        if (is_string_empty($email)) return "";
+        if (is_string_empty($text)) $text = $email;
+        return "<a href=\"".$this->getMailObfuscated("mailto:".$email)."\">".
+            ($text==$email ? $this->getMailObfuscated($text) : htmlspecialchars($text))."</a>";
+    }
+
+    // Return a text with most characters as entities, the same mix the parser uses
+    public function getMailObfuscated($text) {
+        $output = "";
+        $seed = intval(abs(crc32($text)/max(1, strlenb($text))));
+        for ($number = 0; $number<strlenb($text); ++$number) {
+            $char = substrb($text, $number, 1);
+            $ord = ord($char);
+            if ($ord<128) {
+                $random = ($seed*(1+$number))%100;
+                if ($random>90 && strposb("@\"&>", $char)===false) {
+                    $output .= $char;
+                } elseif ($random<45) {
+                    $output .= "&#x".dechex($ord).";";
+                } else {
+                    $output .= "&#".$ord.";";
+                }
+            } else {
+                $output .= $char;
+            }
+        }
+        return $output;
     }
 
     // Check if the website can be edited right now

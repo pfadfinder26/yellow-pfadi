@@ -1,4 +1,4 @@
-# Pfadi 0.8.9
+# Pfadi 0.9.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -172,6 +172,12 @@ print its own address and date into them.
 gets the letterhead that belongs on paper: the logo of the group on the left, the shared page
 `briefkopf` on the right. The logo of the header is white, an `images/logo-print.png` is used for
 the letterhead when there is one.
+
+**Mail addresses:** `getMailHtml` of this extension writes an address as a link the way the
+markdown parser writes one, most characters as decimal or hex entities. A card template calls it
+instead of writing `mailto:` itself, so an address rendered by a layout is as hard to harvest as one
+written in a page. It stops the crude harvesters, not a determined one: what really keeps an address
+out of the lists is not publishing it, and offering a form instead.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 

@@ -1,4 +1,4 @@
-# Pfadi 0.8.9
+# Pfadi 0.9.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -181,6 +181,13 @@ seine eigene Adresse und das Datum hineinzudrucken.
 bekommt den Briefkopf, der aufs Papier gehört: links das Logo der Gruppe, rechts die geteilte Seite
 `briefkopf`. Das Logo im Kopf ist weiß, für den Briefkopf wird `images/logo-print.png` genommen,
 wenn es die Datei gibt.
+
+**Mailadressen:** `getMailHtml` dieser Erweiterung schreibt eine Adresse als Link, so wie der
+Markdown-Parser sie schreibt, die meisten Zeichen als dezimale oder hexadezimale Entities. Eine
+Kartenvorlage ruft das auf, statt selbst `mailto:` zu schreiben, damit eine Adresse aus einem Layout
+genauso schwer zu ernten ist wie eine, die in einer Seite steht. Das hält die groben Sammler auf,
+nicht einen entschlossenen: wirklich aus den Listen bleibt nur eine Adresse, die man nicht
+veröffentlicht, mit einem Formular an ihrer Stelle.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 
