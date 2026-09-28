@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.10.3";
+    const VERSION = "0.11.0";
     public $yellow;         // access to API
     public $number;         // number of the page in the tree
 
@@ -11,95 +11,17 @@ class YellowPfadi {
     public function onLoad($yellow) {
         $this->yellow = $yellow;
         $this->yellow->system->setDefault("pfadiHalstuch", "default");
-        $this->yellow->language->setDefault("PfadiPages", "Pages", "en");
-        $this->yellow->language->setDefault("PfadiPages", "Seiten", "de");
-        $this->yellow->language->setDefault("PfadiExit", "Leave editing", "en");
-        $this->yellow->language->setDefault("PfadiExit", "Bearbeiten beenden", "de");
-        $this->yellow->language->setDefault("PfadiCreate", "New page", "en");
-        $this->yellow->language->setDefault("PfadiCreate", "Neue Seite", "de");
-        $this->yellow->language->setDefault("PfadiDelete", "Delete page", "en");
-        $this->yellow->language->setDefault("PfadiDelete", "Seite löschen", "de");
-        $this->yellow->language->setDefault("PfadiEditPage", "Edit page", "en");
-        $this->yellow->language->setDefault("PfadiEditPage", "Seite bearbeiten", "de");
-        $this->yellow->language->setDefault("PfadiHidePage", "Hide page", "en");
-        $this->yellow->language->setDefault("PfadiHidePage", "Seite verstecken", "de");
-        $this->yellow->language->setDefault("PfadiShowPage", "Show page", "en");
-        $this->yellow->language->setDefault("PfadiShowPage", "Seite zeigen", "de");
     }
 
-    // Handle page extra data, the rail with the editing buttons and the page tree
-    public function onParsePageExtra($page, $name) {
-        if ($name!="footer" || !$this->isEditable()) return null;
-        $this->number = 0;
-        $output = "<div class=\"editrail\" id=\"editrail\"".
-            " data-label-create=\"".$this->yellow->language->getTextHtml("pfadiCreate")."\"".
-            " data-label-delete=\"".$this->yellow->language->getTextHtml("pfadiDelete")."\">\n";
-        $output .= "<input class=\"editrail-toggle\" type=\"checkbox\" id=\"editrail-toggle\" />\n";
-        $output .= "<label class=\"editrail-item editrail-expand\" for=\"editrail-toggle\">".
-            $this->yellow->language->getTextHtml("pfadiPages")."</label>\n";
-        $output .= "<div class=\"editrail-actions\"></div>\n";
-        $output .= "<div class=\"editrail-tree\">\n".
-            $this->getTreeHtml($this->yellow->content->getRootLocation($page->location))."</div>\n";
-        $output .= "<a class=\"editrail-item editrail-exit\" href=\"".$this->getLocationPlain($page)."\">".
-            $this->yellow->language->getTextHtml("pfadiExit")."</a>\n";
-        $output .= "</div>\n";
-        return $output;
-    }
 
-    // Return page tree HTML, the unlisted pages are shown too
-    public function getTreeHtml($location) {
-        $pages = $this->yellow->content->getChildren($location, true);
-        if (count($pages)==0) return "";
-        $output = "<ul>\n";
-        foreach ($pages as $pageTree) {
-            $treeHtml = $this->getTreeHtml($pageTree->getLocation());
-            $id = "editrail-branch-".(++$this->number);
-            $output .= "<li>";
-            if (!is_string_empty($treeHtml)) {
-                $output .= "<input class=\"editrail-branch\" type=\"checkbox\" id=\"".$id."\" checked />";
-            }
-            $output .= "<span class=\"editrail-page\">";
-            if (!is_string_empty($treeHtml)) {
-                $output .= "<label class=\"editrail-twisty\" for=\"".$id."\" aria-hidden=\"true\"></label>";
-            }
-            $class = array("editrail-title");
-            if ($pageTree->isActive()) $class[] = "active";
-            if (!$pageTree->isVisible()) $class[] = "unlisted";
-            $output .= "<a class=\"".implode(" ", $class)."\" href=\"".$pageTree->getLocation(true)."\">".
-                $pageTree->getHtml("title")."</a>";
-            $output .= $this->getToolsHtml($pageTree);
-            $output .= "</span>";
-            $output .= $treeHtml;
-            $output .= "</li>\n";
-        }
-        return $output."</ul>\n";
-    }
 
-    // Return the buttons of a page in the tree, they show up on hover
-    public function getToolsHtml($pageTree) {
-        $output = "<span class=\"editrail-tools\">";
-        // the button that shows or hides a page says which of the two it is now
-        $status = $pageTree->isVisible() ? "status" : "status-hidden";
-        $tools = array("edit" => "pfadiEditPage", "create" => "pfadiCreate",
-            $status => $pageTree->isVisible() ? "pfadiHidePage" : "pfadiShowPage",
-            "delete" => "pfadiDelete");
-        foreach ($tools as $tool=>$text) {
-            $text = $this->yellow->language->getTextHtml($text);
-            $action = $tool=="status-hidden" ? "status" : $tool;
-            $output .= "<a class=\"editrail-tool editrail-tool-".$tool."\" href=\"".
-                htmlspecialchars($pageTree->get("editPageUrl"))."#pfadi-".$action."\"".
-                " title=\"".$text."\" aria-label=\"".$text."\"></a>";
-        }
-        return $output."</span>";
-    }
 
-    // Return the page location without the editing prefix
-    public function getLocationPlain($page) {
-        return $this->yellow->lookup->normaliseUrl(
-            $this->yellow->system->get("coreServerScheme"),
-            $this->yellow->system->get("coreServerAddress"),
-            $this->yellow->system->get("coreServerBase"), $page->location);
-    }
+
+
+
+
+
+
 
     // Return the address of a media file with the time it was changed, so a new file
     // under an old name is fetched again instead of taken from the browser
@@ -157,10 +79,6 @@ class YellowPfadi {
         return $output;
     }
 
-    // Check if the website can be edited right now
-    public function isEditable() {
-        return $this->yellow->extension->isExisting("edit") && $this->yellow->extension->get("edit")->editable;
-    }
 
     // Handle page content element, a phone number that is written in a page
     public function onParseContentElement($page, $name, $text, $attributes, $type) {

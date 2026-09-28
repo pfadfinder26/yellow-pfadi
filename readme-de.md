@@ -1,4 +1,4 @@
-# Pfadi 0.10.3
+# Pfadi 0.11.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -123,14 +123,6 @@ Stelle kommt der Button dieser Seite:
 Auch `banner` ist ein eigenes Layout, ein eigenes Seitenlayout kann also dasselbe Banner zeigen
 wie das Standardlayout.
 
-**Bearbeiten:** mit der [Edit-Erweiterung](https://github.com/annaesvensson/yellow-edit) bekommen
-Redakteur*innen statt der Leiste oben eine Leiste am rechten Rand: sie bleibt beim Scrollen stehen,
-enthält die Knöpfe zum Bearbeiten und einen, der das Bearbeiten beendet, ohne abzumelden, und
-ausgeklappt zeigt sie einen Seitenbaum, in dem auch die unlisted Seiten stehen. Die Leiste merkt
-sich, ob sie ausgeklappt war, Äste lassen sich einklappen, und eine Seite im Baum zeigt unter der
-Maus vier Knöpfe: bearbeiten, Seite hinzufügen, zeigen oder verstecken, löschen. Das
-Bearbeitenfenster steht mittig neben der Leiste und bleibt offen, wenn daneben geklickt wird.
-
 **Blogeinträge:** mit der [Blog-Erweiterung](https://github.com/annaesvensson/yellow-blog) steht
 das `Image` eines Eintrags über seinem Titel.
 
@@ -197,13 +189,19 @@ Eine Zahl in Klammern, die Null von `+43 (0)664`, gehört nicht zur gewählten N
 Kopf der Seite als weiße Maske, auf dem Papier in ihren eigenen Farben. Ohne die Datei ändert sich
 nichts.
 
-**Banner:** das ganze Bild ist zu sehen, nie ein Ausschnitt. Ein Bild, das höher ist als das
+**Banner:** das ganze Bild ist zu sehen, nie ein Ausschnitt. Es ist höchstens 512 Pixel hoch und so
+breit wie das Fenster, ein Bild im Verhältnis **2,5 : 1**, etwa 3000 × 1200, füllt das Banner einer
+Seite von 1280 also genau; ein breiteres Fenster lässt schmale Balken, ein höheres Bild steht
+zwischen ihnen. Ein Bild, das höher ist als das
 Banner, steht zwischen zwei Balken in der Farbe des Bandes, ein breiteres macht das Banner
 einfach niedriger und die Seite beginnt weiter oben.
 
 **Bilder, die sich ändern:** das Theme schreibt die Änderungszeit einer Datei in ihre Adresse,
 `gruppe.jpg?v=1790609511`, damit ein neues Bild unter altem Namen geholt und nicht aus dem
 Zwischenspeicher des Browsers genommen wird.
+
+**Bearbeiten:** mit der [Editrail-Erweiterung](https://github.com/pfadfinder26/yellow-editrail)
+bekommen Redakteur*innen eine Leiste am Rand des Fensters, in den Farben dieses Themes.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
 

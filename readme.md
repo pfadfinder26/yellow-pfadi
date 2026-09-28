@@ -1,4 +1,4 @@
-# Pfadi 0.10.3
+# Pfadi 0.11.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -117,14 +117,6 @@ content leave a placeholder instead, it is replaced by the button of that page:
 `banner` is a layout of its own too, so a layout of your own can show the same banner as the
 default one.
 
-**Editing:** with the [edit extension](https://github.com/annaesvensson/yellow-edit) installed, an
-editor gets a rail at the right edge of the window instead of the bar at the top: it stays in place
-while scrolling, holds the editing buttons and a button that leaves editing without logging out,
-and expands into a page tree that shows the unlisted pages too. The rail remembers whether it was
-expanded, branches of the tree can be collapsed, and a page in the tree shows four buttons when the
-mouse is over it: edit it, add a page, show or hide it, delete it. The window that edits a page is
-centred in the space next to the rail and stays open when something next to it is clicked.
-
 **Blog entries:** with the [blog extension](https://github.com/annaesvensson/yellow-blog) the
 `Image` of an entry stands above its title.
 
@@ -187,13 +179,18 @@ in brackets, the zero of `+43 (0)664`, is left out of the number that is dialled
 association, in the header as a white mask, on paper in its own colours. Without the file nothing
 changes.
 
-**Banner:** the whole picture is shown, never a cut of it. A picture that is taller than the banner
+**Banner:** the whole picture is shown, never a cut of it. It is at most 512 pixels high and as
+wide as the window, so a picture of **2.5 : 1**, about 3000 × 1200, fills the banner of a page of
+1280 exactly; a wider window leaves narrow bars, a taller picture stands between them. A picture that is taller than the banner
 is set between two bars in the colour of the band, a wider one simply makes the banner shorter and
 the page begins higher up.
 
 **Images that change:** the theme writes the time a file was changed into its address,
 `gruppe.jpg?v=1790609511`, so a new picture under an old name is fetched instead of taken from the
 browser's memory.
+
+**Editing:** with the [editrail extension](https://github.com/pfadfinder26/yellow-editrail) an
+editor gets a rail at the side of the window, in the colours of this theme.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
 
