@@ -1858,6 +1858,93 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
 }
 
 
+/* A form that comes from the cloud */
+
+.cloudform {
+    margin: 2rem 0;
+}
+.cloudform h3 {
+    margin: 0 0 1rem;
+    text-align: left;
+}
+.cloudform-question {
+    display: block;
+    margin: 0 0 1.25rem;
+}
+.cloudform-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+.cloudform-required {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 400;
+}
+.cloudform-description {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+}
+.cloudform input[type="text"],
+.cloudform input[type="date"],
+.cloudform input[type="time"],
+.cloudform input[type="datetime-local"],
+.cloudform select,
+.cloudform textarea {
+    width: 100%;
+    max-width: 28rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background-color: #fff;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+.cloudform-options label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+.cloudform-options input {
+    margin-right: 0.5rem;
+}
+.cloudform-website {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.cloudform-submit button {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border: 0;
+    border-radius: 2px;
+    background-color: var(--primary);
+    color: var(--inverse-text);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.cloudform-submit button:hover {
+    background-color: var(--primary-active);
+}
+.cloudform-status {
+    padding: 0.75rem 1rem;
+    background-color: var(--band);
+    font-weight: 700;
+}
+.cloudform-failed {
+    background-color: #f7dcdc;
+}
+.cloudform-link {
+    font-size: 0.8125rem;
+}
+
+
 /* On paper, an announcement looks like the one that is handed out */
 
 @media print {
@@ -1931,8 +2018,65 @@ body:has(.editrail) .yellow-pane:not(#yellow-pane-edit):not(#yellow-pane-create)
         margin-bottom: 0.8cm;
     }
     .calendar-add,
-    .ausschreibung-meta {
+    .ausschreibung-meta,
+    .cloudform-submit,
+    .cloudform-link,
+    .cloudform-status {
         display: none;
+    }
+    /* the form is the sheet that used to be handed out, on a page of its own */
+    .cloudform {
+        margin: 0;
+    }
+    .cloudform,
+    h2:has(+ .cloudform),
+    h3:has(+ .cloudform) {
+        break-before: page;
+    }
+    h2:has(+ .cloudform) + .cloudform,
+    h3:has(+ .cloudform) + .cloudform {
+        break-before: auto;
+    }
+    h2:has(+ .cloudform),
+    h3:has(+ .cloudform) {
+        margin-top: 0;
+    }
+    .cloudform h3 {
+        margin: 0 0 0.6cm;
+        font-size: 14pt;
+        text-align: center;
+    }
+    .cloudform-question {
+        margin: 0 0 0.7cm;
+        break-inside: avoid;
+    }
+    .cloudform input[type="text"],
+    .cloudform input[type="date"],
+    .cloudform input[type="time"],
+    .cloudform input[type="datetime-local"],
+    .cloudform select {
+        width: 100%;
+        max-width: none;
+        height: 0.9cm;
+        border: 0;
+        border-bottom: 1px solid #000;
+        border-radius: 0;
+    }
+    .cloudform textarea {
+        width: 100%;
+        max-width: none;
+        height: 2.5cm;
+        border: 1px solid #000;
+        border-radius: 0;
+    }
+    .cloudform-options input {
+        appearance: none;
+        -webkit-appearance: none;
+        display: inline-block;
+        width: 0.4cm;
+        height: 0.4cm;
+        border: 1px solid #000;
+        vertical-align: -0.05cm;
     }
     .ausschreibung-head h1 {
         font-size: 17pt;
