@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.11.3";
+    const VERSION = "0.11.4";
     public $yellow;         // access to API
 
     // Handle initialisation
