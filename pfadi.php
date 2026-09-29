@@ -3,7 +3,7 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.12.0";
+    const VERSION = "0.12.1";
     public $yellow;         // access to API
 
     // Handle initialisation
@@ -51,15 +51,31 @@ class YellowPfadi {
         return isset($sections[$stufe]) ? $stufe : "";
     }
 
-    // Return what a function is called, on the card and everywhere else
-    public function getFunctionName($key) {
+    // Return what a function is called, on the card and everywhere else, in the form
+    // the person asked for, "Pronomen: sie" makes the GuSp-Leiter*in a GuSp-Leiterin
+    public function getFunctionName($key, $pronoun = "") {
         $sections = $this->getSections();
-        if (isset($sections[$key])) return $sections[$key]."-Leiter*in";
-        $stufe = substru($key, 0, 2)=="sl" ? substru($key, 2) : "";
-        if (isset($sections[$stufe])) return $sections[$stufe]."-Stufenleiter*in";
-        $names = array("gl"=>"Gruppenleiter*in", "ero"=>"Elternrat",
-            "kassier"=>"Kassier*in", "schriftfuehrung"=>"Schriftführung");
-        return isset($names[$key]) ? $names[$key] : $key;
+        if (isset($sections[$key])) {
+            $name = $sections[$key]."-Leiter*in";
+        } else {
+            $stufe = substru($key, 0, 2)=="sl" ? substru($key, 2) : "";
+            if (isset($sections[$stufe])) {
+                $name = $sections[$stufe]."-Stufenleiter*in";
+            } else {
+                $names = array("gl"=>"Gruppenleiter*in", "ero"=>"Elternrat",
+                    "kassier"=>"Kassier*in", "schriftfuehrung"=>"Schriftführung");
+                $name = isset($names[$key]) ? $names[$key] : $key;
+            }
+        }
+        return str_replace("*in", $this->getPronounEnding($pronoun), $name);
+    }
+
+    // Return the ending a person goes by, the star that says both is the one nobody has to ask for
+    public function getPronounEnding($pronoun) {
+        list($pronoun) = $this->yellow->toolbox->getTextList(strtoloweru(trim($pronoun)), "/", 2);
+        if ($pronoun=="sie") return "in";
+        if ($pronoun=="er") return "";
+        return "*in";
     }
 
     // Return the function of a person that a card row is about, and what it is called:
