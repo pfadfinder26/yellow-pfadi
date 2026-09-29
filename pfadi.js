@@ -89,17 +89,10 @@
     }
 
     // the branch of the page that is open starts open, which is meant for the narrow menu that
-    // stands below the others; in the wide menu it would be a dropdown hanging over the page
-    function closeSubmenus() {
-        if (!window.matchMedia("(min-width: 52em)").matches) return;
-        document.querySelectorAll(".submenu-toggle:checked").forEach(function (toggle) {
-            toggle.checked = false;
-        });
-    }
-
-    // where there is no mouse the arrow opens a dropdown, so something has to close it again:
+    // stands below the others; in the wide menu it would be a dropdown hanging over the page.
+    // The arrow opens one where there is no mouse, so something has to close it again as well:
     // a tap next to it, or the escape key
-    function closeSubmenusOutside(target) {
+    function closeSubmenus(target) {
         if (!window.matchMedia("(min-width: 52em)").matches) return;
         document.querySelectorAll(".submenu-toggle:checked").forEach(function (toggle) {
             var submenu = toggle.closest(".submenu");
@@ -110,10 +103,12 @@
         });
     }
 
-    document.addEventListener("DOMContentLoaded", closeSubmenus);
-    document.addEventListener("click", function (e) { closeSubmenusOutside(e.target); });
+    document.addEventListener("DOMContentLoaded", function () { closeSubmenus(); });
+    // going back does not load the page again, it comes back the way it was left, dropdown and all
+    window.addEventListener("pageshow", function () { closeSubmenus(); });
+    document.addEventListener("click", function (e) { closeSubmenus(e.target); });
     document.addEventListener("keydown", function (e) {
-        if (e.key=="Escape") closeSubmenusOutside(null);
+        if (e.key=="Escape") closeSubmenus();
     });
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".cards-scroll").forEach(setupCardScroll);
