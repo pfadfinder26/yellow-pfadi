@@ -1465,6 +1465,8 @@ a.calendar-name:focus-visible {
         transform: translateY(-0.5rem);
         transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
     }
+    /* without JavaScript the branch of the page that is open stays checked, so it is the arrow
+       that closes it again; a mouse has its own way in below */
     .submenu-toggle:checked ~ .submenu-panel,
     .submenu:focus-within > .submenu-panel {
         opacity: 1;

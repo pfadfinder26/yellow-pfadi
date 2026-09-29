@@ -88,6 +88,33 @@
         update();
     }
 
+    // the branch of the page that is open starts open, which is meant for the narrow menu that
+    // stands below the others; in the wide menu it would be a dropdown hanging over the page
+    function closeSubmenus() {
+        if (!window.matchMedia("(min-width: 52em)").matches) return;
+        document.querySelectorAll(".submenu-toggle:checked").forEach(function (toggle) {
+            toggle.checked = false;
+        });
+    }
+
+    // where there is no mouse the arrow opens a dropdown, so something has to close it again:
+    // a tap next to it, or the escape key
+    function closeSubmenusOutside(target) {
+        if (!window.matchMedia("(min-width: 52em)").matches) return;
+        document.querySelectorAll(".submenu-toggle:checked").forEach(function (toggle) {
+            var submenu = toggle.closest(".submenu");
+            if (target && submenu.contains(target)) return;
+            toggle.checked = false;
+            // the dropdown also stands open while something inside it has the focus
+            if (submenu.contains(document.activeElement)) document.activeElement.blur();
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", closeSubmenus);
+    document.addEventListener("click", function (e) { closeSubmenusOutside(e.target); });
+    document.addEventListener("keydown", function (e) {
+        if (e.key=="Escape") closeSubmenusOutside(null);
+    });
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".cards-scroll").forEach(setupCardScroll);
     });
