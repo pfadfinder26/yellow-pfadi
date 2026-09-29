@@ -1,4 +1,4 @@
-# Pfadi 0.11.8
+# Pfadi 0.12.0
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -193,6 +193,15 @@ browser's memory.
 editor gets a rail at the side of the window, in the colours of this theme.
 
 **Portraits:** an image with `class="portrait"` in a card template is shown as a round avatar, for cards of people.
+
+**What a person does:** a page of a person carries one setting, `Funktion`, a list of what they do:
+a section, `biber`, `wiwoe`, `gusp`, `caex`, `raro`; the leader of a section, the same with `sl` in
+front; `gl` for the group leaders and `ero` for the parents. Everything else follows from it. The
+theme writes `Stufe` and `Stufenleitung` into the page, so `[cards … stufe:gusp]` and
+`[cards … stufenleitung:*]` find the page, and it says what a function is called, "GuSp-Leiter*in"
+and "GuSp-Stufenleiter*in". A card shows the function the row is about, so the same person is the
+group leader in one row and the leader of the WiWö in the next. `Rolle` writes the label in other
+words, for somebody whose job has a name of its own.
 
 **Section labels:** `{.stufe.biber}`, `{.stufe.wiwoe}`, `{.stufe.gusp}`, `{.stufe.caex}`,
 `{.stufe.raro}` and `{.stufe.pwa}` turn a heading into a colored label, in the official PPÖ section

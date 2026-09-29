@@ -1,4 +1,4 @@
-# Pfadi 0.11.8
+# Pfadi 0.12.0
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -203,6 +203,15 @@ Zwischenspeicher des Browsers genommen wird.
 bekommen Redakteur*innen eine Leiste am Rand des Fensters, in den Farben dieses Themes.
 
 **Porträts:** ein Bild mit `class="portrait"` in einer Kartenvorlage wird als runder Avatar gezeigt, für Karten von Personen.
+
+**Was eine Person macht:** die Seite einer Person trägt eine Einstellung, `Funktion`, eine Liste
+dessen, was sie macht: eine Stufe, `biber`, `wiwoe`, `gusp`, `caex`, `raro`; die Leitung einer
+Stufe, dasselbe mit `sl` davor; dazu `gl` für die Gruppenleitung und `ero` für den Elternrat. Alles
+andere folgt daraus. Das Theme schreibt `Stufe` und `Stufenleitung` in die Seite, `[cards …
+stufe:gusp]` und `[cards … stufenleitung:*]` finden sie also, und es sagt, wie eine Funktion heißt,
+„GuSp-Leiter*in“ und „GuSp-Stufenleiter*in“. Eine Karte zeigt die Funktion, um die es in der Reihe
+geht, dieselbe Person ist in der einen Reihe also Gruppenleitung und in der nächsten Leitung der
+WiWö. `Rolle` schreibt das Schild anders, für jemanden, dessen Aufgabe einen eigenen Namen hat.
 
 **Stufenschilder:** `{.stufe.biber}`, `{.stufe.wiwoe}`, `{.stufe.gusp}`, `{.stufe.caex}`,
 `{.stufe.raro}` und `{.stufe.pwa}` machen aus einer Überschrift ein farbiges Schild in den offiziellen

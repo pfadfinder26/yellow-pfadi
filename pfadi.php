@@ -3,13 +3,77 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.11.8";
+    const VERSION = "0.12.0";
     public $yellow;         // access to API
 
     // Handle initialisation
     public function onLoad($yellow) {
         $this->yellow = $yellow;
         $this->yellow->system->setDefault("pfadiHalstuch", "default");
+    }
+
+    // Handle page meta data, a person says what they do and the rest follows from it:
+    // "Funktion: gl, slwiwoe" leads the group and the WiWö, so the page is one of the WiWö
+    // and one of the section leaders, and the card rows find it by those
+    public function onParseMetaData($page) {
+        if (is_string_empty($page->get("funktion"))) return;
+        $stufen = $leitung = array();
+        foreach ($this->getFunctions($page) as $key) {
+            $stufe = $this->getFunctionSection($key);
+            if (is_string_empty($stufe)) continue;
+            $stufen[$stufe] = $stufe;
+            if ($stufe!=$key) $leitung[$stufe] = $stufe;
+        }
+        if (!empty($stufen)) $page->set("stufe", implode(", ", $stufen));
+        if (!empty($leitung)) $page->set("stufenleitung", implode(", ", $leitung));
+    }
+
+    // Return the functions of a person, written as one list
+    public function getFunctions($page) {
+        $functions = array();
+        foreach (explode(",", strtoloweru($page->get("funktion"))) as $key) {
+            $key = trim($key);
+            if (!is_string_empty($key)) $functions[] = $key;
+        }
+        return $functions;
+    }
+
+    // Return the sections of a group, the key of a section is the key of a function as well
+    public function getSections() {
+        return array("biber"=>"Biber", "wiwoe"=>"WiWö", "gusp"=>"GuSp", "caex"=>"CaEx", "raro"=>"RaRo");
+    }
+
+    // Return the section a function belongs to, "gusp" and "slgusp" both belong to the GuSp
+    public function getFunctionSection($key) {
+        $sections = $this->getSections();
+        if (isset($sections[$key])) return $key;
+        $stufe = substru($key, 0, 2)=="sl" ? substru($key, 2) : "";
+        return isset($sections[$stufe]) ? $stufe : "";
+    }
+
+    // Return what a function is called, on the card and everywhere else
+    public function getFunctionName($key) {
+        $sections = $this->getSections();
+        if (isset($sections[$key])) return $sections[$key]."-Leiter*in";
+        $stufe = substru($key, 0, 2)=="sl" ? substru($key, 2) : "";
+        if (isset($sections[$stufe])) return $sections[$stufe]."-Stufenleiter*in";
+        $names = array("gl"=>"Gruppenleiter*in", "ero"=>"Elternrat",
+            "kassier"=>"Kassier*in", "schriftfuehrung"=>"Schriftführung");
+        return isset($names[$key]) ? $names[$key] : $key;
+    }
+
+    // Return the function of a person that a card row is about, and what it is called:
+    // in the GuSp row a GuSp leader, in the row of the group leaders the group leader
+    public function getFunctionShown($page, $key, $value) {
+        $functions = $this->getFunctions($page);
+        if ($key=="stufe" || $key=="stufenleitung") {
+            if ($value=="*") list($value) = $this->yellow->toolbox->getTextList($page->get($key), ",", 2);
+            $value = trim($value);
+            if (in_array("sl".$value, $functions)) return "sl".$value;
+            if (in_array($value, $functions)) return $value;
+        }
+        if ($key=="funktion" && in_array($value, $functions)) return $value;
+        return count($functions)!=0 ? $functions[0] : "";
     }
 
     // Return the address of a media file with the time it was changed, so a new file
