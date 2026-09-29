@@ -1383,7 +1383,7 @@ a.calendar-name:focus-visible {
 
 /* the navigation stands beside the logos as soon as both fit on one line, which needs more
    room than the rest of the layout does, so it waits for a wider screen than everything else */
-@media screen and (min-width: 60em) {
+@media screen and (min-width: 64em) {
     :root {
         --gutter: 2.5rem;
         --header-height: 4.625rem;
