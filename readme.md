@@ -1,4 +1,4 @@
-# Pfadi 0.11.4
+# Pfadi 0.11.5
 
 Pfadi is a theme for scout group websites in the PPÖ design. Designed by Liam Perlaki.
 
@@ -65,7 +65,7 @@ block line separates the cards. They wrap into one column on phones:
     ! ! ! ### GuSp {.stufe.gusp}
     ! ! ! Freitag 18:30 bis 20:00
 
-**Navigation:** the top level pages are the menu. A page with subpages gets a dropdown that fades in on hover, on phones the subpages start collapsed and slide open when the arrow next to the page is tapped. The subpages of the page you are on start open.
+**Navigation:** the top level pages are the menu. A page with subpages gets a dropdown. Where there is a mouse it fades in when the pointer is on the page, where there is not the arrow next to the page is a button of its own: it opens the dropdown, the name beside it goes to the page. So a tablet, which shows the wide menu but has no mouse, does not follow the link and flash the dropdown at the same time. On phones the subpages start collapsed and slide open at the same arrow. The subpages of the page you are on start open.
 
 **Cards from pages:** writing the same facts twice is no fun. With the [Cards extension](https://github.com/pfadfinder26/yellow-cards) a card is generated from another page and its settings, `[cards /stufen/ stufe]` makes one card per section page. This theme styles `.cards` and `.card`, the card markup comes from your own template.
 
