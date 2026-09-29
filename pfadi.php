@@ -3,25 +3,14 @@
 // Based on Datenstrom Yellow, https://datenstrom.se/yellow/
 
 class YellowPfadi {
-    const VERSION = "0.11.0";
+    const VERSION = "0.11.1";
     public $yellow;         // access to API
-    public $number;         // number of the page in the tree
 
     // Handle initialisation
     public function onLoad($yellow) {
         $this->yellow = $yellow;
         $this->yellow->system->setDefault("pfadiHalstuch", "default");
     }
-
-
-
-
-
-
-
-
-
-
 
     // Return the address of a media file with the time it was changed, so a new file
     // under an old name is fetched again instead of taken from the browser
@@ -78,7 +67,6 @@ class YellowPfadi {
         }
         return $output;
     }
-
 
     // Handle page content element, a phone number that is written in a page
     public function onParseContentElement($page, $name, $text, $attributes, $type) {
