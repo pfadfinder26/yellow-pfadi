@@ -92,6 +92,18 @@ class YellowPfadi {
         return count($functions)!=0 ? $functions[0] : "";
     }
 
+    // Return the address of a picture, "team/elly.png" stands in the pictures of this website,
+    // "media/images/cloud/x.jpg" and an address of its own stand where they say
+    public function getImageUrl($value) {
+        $value = trim($value);
+        if (is_string_empty($value)) return "";
+        if (preg_match("#^(https?:)?//#", $value)) return $value;
+        $base = $this->yellow->page->getBase();
+        $location = strposu($value, "/")===0 || substru($value, 0, 6)=="media/" ?
+            $base."/".ltrim($value, "/") : $base.$this->yellow->system->get("coreImageLocation").$value;
+        return $this->getMediaUrl($location);
+    }
+
     // Return the address of a media file with the time it was changed, so a new file
     // under an old name is fetched again instead of taken from the browser
     public function getMediaUrl($location) {

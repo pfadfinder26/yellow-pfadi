@@ -4,9 +4,7 @@
 // A blog entry, the image of the entry stands above the title.
 $page = $this->yellow->page;
 $image = $page->get("image");
-$fileLocationImage = substru($image, 0, 1)!="/" ?
-    $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
-    $page->getBase().$image;
+$fileLocationImage = $this->yellow->extension->get("pfadi")->getImageUrl($image);
 $class = "entry";
 foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag) {
     if (!is_string_empty($tag)) $class .= " tag-".$this->yellow->lookup->normaliseClass($tag);
@@ -24,7 +22,7 @@ if (!is_string_empty($page->get("ausschreibung"))) {
 <div class="main" id="main" role="main">
 <div class="<?php echo htmlspecialchars($class) ?>">
 <?php if (!is_string_empty($image)): ?>
-<img class="entry-image" src="<?php echo htmlspecialchars($this->yellow->extension->get("pfadi")->getMediaUrl($fileLocationImage)) ?>" alt="" />
+<img class="entry-image" src="<?php echo htmlspecialchars($fileLocationImage) ?>" alt="" />
 <?php endif ?>
 <div class="entry-title"><h1><?php echo $page->getHtml("titleContent") ?></h1></div>
 <div class="entry-meta"><p><?php echo $page->getDateHtml("published") ?> <?php echo $this->yellow->language->getTextHtml("blogBy") ?> <?php $number = 0; foreach (preg_split("/\s*,\s*/", $page->get("author")) as $author): ?><?php echo $number++ ? ", " : "" ?><a href="<?php echo $locationStart.$this->yellow->lookup->normaliseArguments("author:$author") ?>"><?php echo htmlspecialchars($author) ?></a><?php endforeach ?></p></div>

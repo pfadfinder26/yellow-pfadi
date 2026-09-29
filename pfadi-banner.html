@@ -13,7 +13,7 @@ $fileLocationHalstuch = strposu($halstuch, "/")===false ?
 <?php if (!is_array_empty($banners)): ?>
 <div class="banner<?php echo count($banners)>1 ? " banner-carousel" : "" ?>">
 <?php foreach ($banners as $number=>$file): ?>
-<img src="<?php echo htmlspecialchars($this->yellow->extension->get("pfadi")->getMediaUrl($this->yellow->page->getBase()."/".ltrim($file, "/"))) ?>" alt=""<?php echo $number ? " loading=\"lazy\"" : "" ?> />
+<img src="<?php echo htmlspecialchars($this->yellow->extension->get("pfadi")->getImageUrl($file)) ?>" alt=""<?php echo $number ? " loading=\"lazy\"" : "" ?> />
 <?php endforeach ?>
 </div>
 <?php if ($halstuch!="none"): ?>

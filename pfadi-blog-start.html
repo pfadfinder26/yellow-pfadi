@@ -21,9 +21,7 @@ $this->yellow->layout("header");
 <?php foreach ($pages as $pageEntry): ?>
 <?php
 $image = $pageEntry->get("image");
-$fileLocationImage = substru($image, 0, 1)!="/" ?
-    $pageEntry->getBase().$this->yellow->system->get("coreImageLocation").$image :
-    $pageEntry->getBase().$image;
+$fileLocationImage = $this->yellow->extension->get("pfadi")->getImageUrl($image);
 $class = "card card-link";
 if (strtotime($pageEntry->get("published"))>time()) $class .= " entry-scheduled";
 $description = $pageEntry->get("description");

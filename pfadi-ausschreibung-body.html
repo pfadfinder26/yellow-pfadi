@@ -10,9 +10,7 @@ $fileNameLogo = $this->yellow->system->get("coreMediaDirectory")."images/".$logo
 $fileLocationLogo = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/".$logo;
 // the image of the page goes beside the list, where the list begins
 $image = $page->get("image");
-$fileLocationImage = substru($image, 0, 1)!="/" ?
-    $page->getBase().$this->yellow->system->get("coreImageLocation").$image :
-    $page->getBase().$image;
+$fileLocationImage = $this->yellow->extension->get("pfadi")->getImageUrl($image);
 // the logo of the group belongs on the paper as well, in its own colours
 $fileNameGroup = $this->yellow->system->get("coreMediaDirectory")."images/logo-gruppe.svg";
 $fileLocationGroup = $page->getBase().$this->yellow->system->get("coreMediaLocation")."images/logo-gruppe.svg";
@@ -26,7 +24,7 @@ $briefkopfHtml = "<div class=\"ausschreibung-briefkopf\">\n".
     "</div>\n";
 $contentHtml = $page->getContentHtml();
 if (!is_string_empty($image) && strposu($contentHtml, "ausschreibung-image")===false) {
-    $imageHtml = "<img class=\"ausschreibung-image\" src=\"".htmlspecialchars($this->yellow->extension->get("pfadi")->getMediaUrl($fileLocationImage))."\" alt=\"\" />\n";
+    $imageHtml = "<img class=\"ausschreibung-image\" src=\"".htmlspecialchars($fileLocationImage)."\" alt=\"\" />\n";
     $contentHtml = strposu($contentHtml, "<dl>")!==false ?
         preg_replace("/<dl>/", $imageHtml."<dl>", $contentHtml, 1) : $imageHtml.$contentHtml;
 }
