@@ -1467,8 +1467,7 @@ a.calendar-name:focus-visible {
     }
     /* without JavaScript the branch of the page that is open stays checked, so it is the arrow
        that closes it again; a mouse has its own way in below */
-    .submenu-toggle:checked ~ .submenu-panel,
-    .submenu:focus-within > .submenu-panel {
+    .submenu-toggle:checked ~ .submenu-panel {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
@@ -1478,10 +1477,27 @@ a.calendar-name:focus-visible {
         .submenu-button {
             pointer-events: none;
         }
-        .submenu:hover > .submenu-panel {
+        .submenu:hover > .submenu-panel,
+        .submenu:focus-within > .submenu-panel {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+    }
+    /* without a mouse the first tap on the item opens the dropdown instead of following the
+       link: the button lies over the whole item. Once the dropdown is open the item is a link
+       again, and the arrow beside it closes what it opened */
+    @media (hover: none), (pointer: coarse) {
+        .submenu-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .submenu:has(.submenu-toggle:checked) .submenu-button::after {
+            display: none;
         }
     }
     .submenu-panel ul {

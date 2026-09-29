@@ -1,4 +1,4 @@
-# Pfadi 0.11.6
+# Pfadi 0.11.7
 
 Pfadi ist ein Theme für Websites von Pfadfindergruppen im PPÖ-Design. Gestaltet von Liam Perlaki.
 
@@ -67,7 +67,7 @@ Verschachtelungsebene, eine leere Blockzeile trennt die Karten. Am Handy steht a
     ! ! ! ### GuSp {.stufe.gusp}
     ! ! ! Freitag 18:30 bis 20:00
 
-**Navigation:** die obersten Seiten sind das Menü. Eine Seite mit Unterseiten bekommt ein Klappmenü. Wo es eine Maus gibt, blendet es ein, sobald der Zeiger auf der Seite steht, wo nicht, ist der Pfeil neben der Seite ein eigener Knopf: er klappt das Menü auf, der Name daneben führt auf die Seite. Ein Tablet, das das breite Menü zeigt, aber keine Maus hat, folgt also nicht dem Link und blitzt dabei das Klappmenü auf. Ein Tipp daneben klappt es wieder zu, die Escape-Taste auch. Am Handy sind die Unterseiten zugeklappt und fahren am selben Pfeil auf. Die Unterseiten der aktuellen Seite sind schon offen.
+**Navigation:** die obersten Seiten sind das Menü. Eine Seite mit Unterseiten bekommt ein Klappmenü. Wo es eine Maus gibt, blendet es ein, sobald der Zeiger auf der Seite steht, und ein Klick führt direkt auf die Seite. Wo es keine Maus gibt, auf einem Tablet mit dem breiten Menü, klappt der erste Tipp auf die Seite das Menü auf, statt dem Link zu folgen, der zweite führt auf die Seite, und der Pfeil daneben klappt es wieder zu. Ein Tipp neben dem Menü schließt es auch, die Escape-Taste ebenso. Am Handy sind die Unterseiten zugeklappt und fahren am selben Pfeil auf. Die Unterseiten der aktuellen Seite sind schon offen.
 
 **Karten aus Seiten:** dieselben Angaben zweimal schreiben macht keine Freude. Mit der [Cards-Erweiterung](https://github.com/pfadfinder26/yellow-cards) entsteht eine Karte aus einer anderen Seite und deren Einstellungen, `[cards /stufen/ stufe]` macht eine Karte pro Stufenseite. Dieses Theme gestaltet `.cards` und `.card`, das HTML der Karte kommt aus der eigenen Vorlage.
 
