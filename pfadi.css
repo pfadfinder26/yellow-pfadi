@@ -362,8 +362,7 @@ a:focus-visible {
     scroll-snap-align: center;
     width: 100%;
     height: auto;
-    /* as high as the banner used to be at the full width of the page, 1280 / 2.5 */
-    max-height: min(32rem, 70vh);
+    max-height: min(50rem, 50vh);
     object-fit: contain;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1382,9 +1381,11 @@ a.calendar-name:focus-visible {
 
 /* Responsive and print */
 
-@media screen and (min-width: 48em) {
+/* the navigation stands beside the logos as soon as both fit on one line, which needs more
+   room than the rest of the layout does, so it waits for a wider screen than everything else */
+@media screen and (min-width: 60em) {
     :root {
-        --gutter: 4rem;
+        --gutter: 2.5rem;
         --header-height: 4.625rem;
     }
     .header .sitename h1 {
@@ -1414,7 +1415,7 @@ a.calendar-name:focus-visible {
         margin-bottom: 0;
     }
     .navigation a {
-        padding: 0 0.625rem;
+        padding: 0 0.5rem;
         border-bottom: 0;
         line-height: var(--header-height);
     }
@@ -1485,6 +1486,12 @@ a.calendar-name:focus-visible {
     .band {
         padding-top: 3.5rem;
         padding-bottom: 3.5rem;
+    }
+}
+/* once the page is wider than it is, the gutter grows back to what it was */
+@media screen and (min-width: 80em) {
+    :root {
+        --gutter: 4rem;
     }
 }
 @media (prefers-reduced-motion: reduce) {
