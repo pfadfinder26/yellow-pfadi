@@ -1530,6 +1530,10 @@ a.calendar-name:focus-visible {
         padding-top: 3.5rem;
         padding-bottom: 3.5rem;
     }
+    /* the heading keeps the distance to the top it has on small screens */
+    .band > h2:first-child {
+        margin-top: -1.3125rem;
+    }
 }
 /* once the page is wider than it is, the gutter grows back to what it was */
 @media screen and (min-width: 80em) {
