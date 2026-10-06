@@ -266,6 +266,11 @@ a:focus-visible {
 .navigation > ul > li:last-child {
     margin-bottom: 0.5rem;
 }
+/* no line under the last entry, it would hint at more below */
+.navigation > ul > li:last-child > a,
+.navigation > ul > li:last-child > .submenu-button {
+    border-bottom: 0;
+}
 .navigation a {
     display: block;
     padding: 0.625rem 0;
@@ -531,6 +536,10 @@ a:focus-visible {
 }
 .band > :first-child {
     margin-top: 0;
+}
+/* a heading on top sits a little higher, in the optical middle of the space above the content */
+.band > h2:first-child {
+    margin-top: -0.3125rem;
 }
 .band > :last-child {
     margin-bottom: 0;
